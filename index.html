@@ -14,21 +14,10 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #FF7F50 0%, #FF6B35 50%, #FF8C69 100%);
-            background-size: 200% 200%;
+            background: #011E42;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
             position: relative;
-            animation: gradient-flow 15s ease infinite;
-        }
-
-        @keyframes gradient-flow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+            padding: 2rem 0;
         }
 
         /* Animated background elements */
@@ -38,14 +27,14 @@
             height: 100%;
             overflow: hidden;
             z-index: 1;
+            pointer-events: none;
         }
 
         .orb {
             position: absolute;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+            background: rgba(255, 95, 31, 0.15);
             animation: float-orb 20s infinite ease-in-out;
-            backdrop-filter: blur(2px);
         }
 
         .orb1 { width: 400px; height: 400px; top: -200px; left: -200px; animation-delay: 0s; }
@@ -66,6 +55,8 @@
             text-align: center;
             z-index: 10;
             padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
             animation: fade-in-up 1.2s cubic-bezier(0.16, 1, 0.3, 1);
             perspective: 1000px;
         }
@@ -112,33 +103,113 @@
 
         /* Interactive hover shake - like actually shaking hands! */
         .logo-container:hover .logo {
-            animation: shake-on-it 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
+            animation: shake-on-it 2s ease-in-out infinite;
             filter: drop-shadow(0 15px 50px rgba(0, 0, 0, 0.25));
         }
 
         @keyframes shake-on-it {
             0%, 100% { transform: translateX(0) rotate(0deg); }
-            10% { transform: translateX(-8px) rotate(-1.5deg); }
-            20% { transform: translateX(8px) rotate(1.5deg); }
-            30% { transform: translateX(-8px) rotate(-1.5deg); }
-            40% { transform: translateX(8px) rotate(1.5deg); }
-            50% { transform: translateX(-8px) rotate(-1.5deg); }
-            60% { transform: translateX(8px) rotate(1.5deg); }
-            70% { transform: translateX(-4px) rotate(-0.75deg); }
-            80% { transform: translateX(4px) rotate(0.75deg); }
-            90% { transform: translateX(-2px) rotate(-0.25deg); }
+            /* First shake */
+            2.5% { transform: translateX(-4px) rotate(-0.8deg); }
+            5% { transform: translateX(4px) rotate(0.8deg); }
+            /* Second shake */
+            7.5% { transform: translateX(-4px) rotate(-0.8deg); }
+            10% { transform: translateX(4px) rotate(0.8deg); }
+            /* Third shake */
+            12.5% { transform: translateX(-4px) rotate(-0.8deg); }
+            15% { transform: translateX(4px) rotate(0.8deg); }
+            /* Fourth shake */
+            17.5% { transform: translateX(-4px) rotate(-0.8deg); }
+            20% { transform: translateX(4px) rotate(0.8deg); }
+            /* Return to center and pause */
+            22.5% { transform: translateX(0) rotate(0deg); }
+            /* Pause period */
+            22.5%, 100% { transform: translateX(0) rotate(0deg); }
         }
 
-        /* Coming soon text */
+        /* Main headline */
         .coming-soon {
-            font-size: clamp(1.5rem, 4vw, 2.8rem);
+            font-size: clamp(1.8rem, 5vw, 3.2rem);
             color: rgba(255, 255, 255, 0.98);
-            font-weight: 300;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
+            font-weight: 400;
+            letter-spacing: 0.05em;
             animation: text-glow 3s ease-in-out infinite;
             text-shadow: 0 3px 20px rgba(0, 0, 0, 0.15);
             margin-bottom: 2rem;
+            line-height: 1.3;
+        }
+        
+        /* Subheading */
+        .subheading {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Body text container */
+        .body-text-container {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 2.5rem 3rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        /* Body text - two column layout for professional look */
+        .body-text {
+            font-size: clamp(0.72rem, 1.44vw, 0.8rem);
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 300;
+            line-height: 1.6;
+            text-align: left;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            column-gap: 3.2rem;
+            row-gap: 0;
+        }
+        
+        .body-text p {
+            margin-bottom: 0;
+        }
+        
+        .body-text p:nth-child(1),
+        .body-text p:nth-child(2) {
+            margin-bottom: 0;
+        }
+        
+        .body-text p:nth-child(3) {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 2em;
+            margin-bottom: 0;
+            padding-top: 0;
+            line-height: 1.4;
+        }
+        
+        .body-text .donation-link {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 2em;
+            padding-top: 0;
+            line-height: 1;
+        }
+        
+        @media (max-width: 968px) {
+            .body-text-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .body-text {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
         }
 
         @keyframes text-glow {
@@ -206,8 +277,12 @@
 
         /* Contact section */
         .contact-section {
-            margin-top: 4rem;
-            animation: fade-in 2s ease-in-out 2s both;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            animation: fade-in 0.8s ease-in-out 0.5s both;
+            position: relative;
+            z-index: 20;
+            pointer-events: auto;
         }
 
         .contact-btn {
@@ -215,7 +290,7 @@
             padding: 0.875rem 2.5rem;
             color: rgba(255, 255, 255, 0.95);
             background: transparent;
-            border: 2px solid #E8B4F0;
+            border: 2px solid #FF5F1F;
             border-radius: 50px;
             text-decoration: none;
             font-size: 1rem;
@@ -223,24 +298,52 @@
             letter-spacing: 0.05em;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            box-shadow: 0 4px 15px rgba(232, 180, 240, 0.15);
+            box-shadow: 0 4px 15px rgba(255, 95, 31, 0.15);
+            position: relative;
+            z-index: 21;
+            pointer-events: auto;
         }
 
         .contact-btn:hover {
-            background: #E8B4F0;
-            color: #FF6B35;
+            background: #FF5F1F;
+            color: #FFFFFF;
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(232, 180, 240, 0.3);
+            box-shadow: 0 6px 25px rgba(255, 95, 31, 0.3);
         }
 
         .contact-btn:active {
             transform: translateY(0);
+        }
+        
+        .donation-link {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: underline;
+            font-size: 0.855rem;
+            font-weight: 300;
+            transition: color 0.3s ease;
+            position: relative;
+            z-index: 21;
+            pointer-events: auto;
+        }
+        
+        .body-text .donation-link {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-top: 0.25rem;
+        }
+        
+        .donation-link:hover {
+            color: #FF5F1F;
         }
 
         /* Social section */
         .social-section {
             margin-top: 3rem;
             animation: fade-in 2s ease-in-out 2.5s both;
+            position: relative;
+            z-index: 20;
+            pointer-events: auto;
         }
 
         .social-heading {
@@ -269,18 +372,21 @@
             text-decoration: none;
             color: rgba(255, 255, 255, 0.85);
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 21;
+            pointer-events: auto;
         }
 
         .social-link:hover {
             transform: translateY(-5px);
-            color: #E8B4F0;
+            color: #FF5F1F;
         }
 
         .social-icon {
             width: 48px;
             height: 48px;
             background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(232, 180, 240, 0.4);
+            border: 2px solid rgba(255, 95, 31, 0.4);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -298,13 +404,13 @@
         }
 
         .social-link:hover .social-icon {
-            background: rgba(232, 180, 240, 0.2);
-            border-color: #E8B4F0;
-            box-shadow: 0 6px 20px rgba(232, 180, 240, 0.3);
+            background: rgba(255, 95, 31, 0.2);
+            border-color: #FF5F1F;
+            box-shadow: 0 6px 20px rgba(255, 95, 31, 0.3);
         }
 
         .social-link:hover .social-icon svg {
-            fill: #E8B4F0;
+            fill: #FF5F1F;
         }
 
         .social-label {
@@ -319,6 +425,90 @@
             opacity: 0.7;
             font-weight: 300;
         }
+        
+        /* PWHL Section */
+        .pwhl-section {
+            margin-top: 4rem;
+            animation: fade-in 2s ease-in-out 3s both;
+        }
+        
+        .pwhl-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.85);
+            transition: all 0.3s ease;
+            padding: 1.6rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 95, 31, 0.2);
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 20;
+            pointer-events: auto;
+        }
+        
+        .pwhl-link:hover {
+            background: rgba(255, 95, 31, 0.1);
+            border-color: rgba(255, 95, 31, 0.4);
+            transform: translateY(-3px);
+            color: rgba(255, 255, 255, 0.95);
+        }
+        
+        .pwhl-logo {
+            width: 100%;
+            max-width: 240px;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .pwhl-logo svg {
+            width: 100%;
+            height: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .pwhl-logo .pwhl-cls-1 {
+            fill: rgba(255, 255, 255, 0.9);
+            transition: fill 0.3s ease;
+        }
+        
+        .pwhl-link:hover .pwhl-logo .pwhl-cls-1 {
+            fill: #FF5F1F;
+        }
+        
+        .pwhl-info {
+            text-align: center;
+        }
+        
+        .pwhl-league {
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.95);
+        }
+        
+        .pwhl-text {
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pwhl-team {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #FF5F1F;
+            margin-top: 0.25rem;
+        }
 
         /* Mobile responsiveness */
         @media (max-width: 768px) {
@@ -328,8 +518,22 @@
             }
             
             .coming-soon {
-                font-size: 1.25rem;
-                letter-spacing: 0.3em;
+                font-size: 1.5rem;
+                letter-spacing: 0.05em;
+            }
+            
+            .subheading {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .body-text-container {
+                padding: 2rem 1.5rem;
+                margin-bottom: 2.5rem;
+            }
+            
+            .body-text {
+                font-size: 0.76rem;
             }
 
             .orb { display: none; }
@@ -347,6 +551,10 @@
                 font-size: 0.9rem;
                 padding: 0.75rem 2rem;
             }
+            
+            .donation-link {
+                font-size: 0.9rem;
+            }
 
             .social-links {
                 gap: 1.5rem;
@@ -357,6 +565,19 @@
                 height: 42px;
                 font-size: 1.3rem;
             }
+            
+            .pwhl-section {
+                margin-top: 3rem;
+            }
+            
+            .pwhl-link {
+                padding: 1.25rem;
+                max-width: 90%;
+            }
+            
+            .pwhl-logo {
+                max-width: 250px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -365,22 +586,31 @@
             }
             
             .coming-soon {
-                font-size: 1rem;
-                letter-spacing: 0.2em;
+                font-size: 1.3rem;
+                letter-spacing: 0.05em;
             }
-
-            .loading-dots {
-                gap: 8px;
+            
+            .subheading {
+                font-size: 0.95rem;
+                margin-bottom: 1.5rem;
             }
-
-            .dot {
-                width: 10px;
-                height: 10px;
+            
+            .body-text-container {
+                padding: 1.5rem 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .body-text {
+                font-size: 0.72rem;
             }
 
             .contact-btn {
                 font-size: 0.85rem;
                 padding: 0.7rem 1.75rem;
+            }
+            
+            .donation-link {
+                font-size: 0.85rem;
             }
 
             .social-section {
@@ -403,6 +633,36 @@
 
             .social-handle {
                 font-size: 0.65rem;
+            }
+            
+            .pwhl-section {
+                margin-top: 2.5rem;
+            }
+            
+            .pwhl-link {
+                padding: 1.5rem;
+                gap: 1.25rem;
+            }
+            
+            .pwhl-logo {
+                max-width: 160px;
+            }
+            
+            .pwhl-link {
+                max-width: 320px;
+                padding: 1.25rem;
+            }
+            
+            .pwhl-league {
+                font-size: 0.8rem;
+            }
+            
+            .pwhl-text {
+                font-size: 0.85rem;
+            }
+            
+            .pwhl-team {
+                font-size: 0.9rem;
             }
         }
 
@@ -430,25 +690,31 @@
 
     <!-- Main content -->
     <div class="container">
-        <p class="hint-text">Click or Hover over the logo to "shake on" ✨</p>
         <div class="logo-container" id="logoContainer">
-            <img src="ShakeOn.png" alt="Shake On Logo" class="logo" id="logo">
+            <img src="SO-WHT_1@3x-8.png" alt="Shake On Logo" class="logo" id="logo">
         </div>
-        <p class="coming-soon">Coming Soon</p>
-        <div class="loading-dots">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
-
+        <p class="subheading">This season, I'm personally pledging $20 for every point I score, every block I make, and every Sirens win — all going to The Michael J. Fox Foundation for Parkinson's research.</p>
+        
         <!-- Contact Section -->
         <div class="contact-section">
-            <a href="mailto:hello@shakeon.org" class="contact-btn">Get in Touch</a>
+            <a href="mailto:hello@shakeon.org?subject=I commit to Match your pledge! (enter your name and optional dedication message)" class="contact-btn">Match my pledge</a>
+        </div>
+        
+        <div class="body-text-container">
+            <div class="body-text">
+                <p>Ten years ago, my dad James was diagnosed with Parkinson's disease. If you know someone with Parkinson's, you know how it changes everything — not just for them, but for the whole family. My dad has always been my biggest supporter. He's the reason I fell in love with hockey, the reason I kept pushing through every challenge to get here. Since his diagnosis, he's adopted a phrase that's become our family mantra: Shake On — a reminder to keep moving forward, no matter what.</p>
+                
+                <p>This season, I wanted to find a way to use my platform as a professional hockey player for something bigger than the game. So I'm launching Shake On. I play defense for the New York Sirens in the PWHL, and I wear number 20. This season, I'm personally pledging $20 for every point I score, every block I make, and every Sirens win — all going to The Michael J. Fox Foundation for Parkinson's research. My goal is to raise $20,000 — 20 for #20.</p>
+                
+                <p>More than 6 million people worldwide live with Parkinson's, and there's still no cure. But research is making progress, and every dollar helps.You can join me by pledging alongside me this season, or by making a one-time donation right here. 100% of what you give goes directly to MJFF's research efforts. Let's Shake On together.</p>
+                
+                <a href="https://give.michaeljfox.org/fundraiser/6816216" target="_blank" rel="noopener noreferrer" class="donation-link">Make a one-time donation</a>
+            </div>
         </div>
 
         <!-- Social Section -->
         <div class="social-section">
-            <p class="social-heading">Connect With Us</p>
+            <p class="social-heading">Connect With Me</p>
             <div class="social-links">
                 <a href="https://instagram.com/shakeonsimpson" target="_blank" rel="noopener noreferrer" class="social-link">
                     <div class="social-icon">
@@ -478,6 +744,25 @@
                     <div class="social-handle">@allysimpson</div>
                 </a>
             </div>
+        </div>
+        
+        <!-- PWHL Section -->
+        <div class="pwhl-section">
+            <a href="https://www.thepwhl.com/en/stats/schedule/4/8/all-months/homeaway?league=1" target="_blank" rel="noopener noreferrer" class="pwhl-link">
+                <div class="pwhl-logo">
+                    <svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 575.98 122.25" style="width: 100%; height: auto;">
+                        <defs><style>.pwhl-cls-1{fill:#33058d;stroke-width:0px;}</style></defs>
+                        <g id="Layer_1-2">
+                            <path class="pwhl-cls-1" d="M85.04,0H0v103.45h26.04c4.51,0,8.17-3.66,8.17-8.17v-20.87h51.12c26.01,0,36.69-10.84,36.84-37.43C122.17,10.71,111.41,0,85.04,0ZM73.48,51.47h-39.26v-28.52h39.26c12.17,0,14.48,4.93,14.48,14.04,0,10.96-3.52,14.48-14.48,14.48ZM575.98,80.32l-4.78,17.16c-.98,3.53-4.2,5.97-7.86,5.97h-84.12V0h33.49v80.32h63.27ZM234.83,114.45v5.7c0,1.16-.94,2.09-2.09,2.09h-16.42c-1.16,0-2.09-.94-2.09-2.09v-5.7c0-1.16.94-2.1,2.09-2.1h16.42c1.16,0,2.09.94,2.09,2.1ZM178.18,99.02L124.91,0h29.98c3.53,0,6.78,1.94,8.45,5.05l37.69,70.07s-8.48,15.76-11.68,21.71c-.72,1.34-2.12,2.18-3.65,2.18h-7.53ZM294.16,0h29.97l-53.26,99.02h-7.52c-1.52,0-2.92-.84-3.65-2.18l-11.68-21.72L285.71,5.05c1.67-3.11,4.92-5.05,8.45-5.05ZM234.99,54.24l-6.38-11.87,20.55-38.21C250.54,1.6,253.22,0,256.13,0h8.04l-29.18,54.24ZM220.43,81.31l-17.98,33.42c-2.49,4.63-7.32,7.51-12.57,7.51h-26.29l-8.44-15.7h34.82c2.54,0,4.88-1.4,6.08-3.63l18-33.47,6.38,11.87ZM259.08,106.55h34.82l-8.44,15.7h-26.29c-5.25,0-10.08-2.89-12.57-7.51L184.87,0h8.04c2.91,0,5.59,1.6,6.97,4.16l53.12,98.75c1.2,2.24,3.54,3.63,6.08,3.63ZM436.96,0h26.04v103.45h-26.04c-4.51,0-8.17-3.66-8.17-8.17v-33.72h-60.2v33.72c0,4.51-3.66,8.17-8.17,8.17h-26.04V0h26.04c4.51,0,8.17,3.66,8.17,8.17v30.25h60.2V8.17c0-4.51,3.66-8.17,8.17-8.17Z"/>
+                        </g>
+                    </svg>
+                </div>
+                <div class="pwhl-info">
+                    <p class="pwhl-league">Professional Women's Hockey League</p>
+                    <p class="pwhl-text">Watch games & Track our progress this season</p>
+                    <p class="pwhl-team">New York Sirens</p>
+                </div>
+            </a>
         </div>
     </div>
 
