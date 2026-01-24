@@ -508,6 +508,107 @@
             display: block;
         }
         
+        /* Thank You Screen */
+        .thank-you-screen {
+            display: none;
+            text-align: center;
+        }
+        
+        .thank-you-screen.active {
+            display: block;
+        }
+        
+        .form-container {
+            display: block;
+        }
+        
+        .form-container.hidden {
+            display: none;
+        }
+        
+        .thank-you-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .thank-you-message {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        .thank-you-signature {
+            font-size: 1rem;
+            color: #FF5F1F;
+            margin-top: 1rem;
+            font-weight: 400;
+        }
+        
+        .thank-you-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .thank-you-btn {
+            padding: 0.875rem 2rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .thank-you-btn-primary {
+            background: #FF5F1F;
+            color: #FFFFFF;
+            border: 2px solid #FF5F1F;
+        }
+        
+        .thank-you-btn-primary:hover {
+            background: #ff7a3d;
+            border-color: #ff7a3d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 95, 31, 0.4);
+        }
+        
+        .thank-you-btn-secondary {
+            background: transparent;
+            color: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .thank-you-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #FFFFFF;
+        }
+        
+        @media (max-width: 768px) {
+            .thank-you-image {
+                max-width: 100%;
+            }
+            
+            .thank-you-actions {
+                flex-direction: column;
+            }
+            
+            .thank-you-btn {
+                width: 100%;
+            }
+        }
+        
         @media (max-width: 768px) {
             .modal-content {
                 padding: 2rem 1.5rem;
@@ -1039,8 +1140,11 @@
     <div id="pledgeModal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close" onclick="closePledgeModal()">&times;</button>
-            <h2 class="modal-title">Match My Pledge</h2>
-            <form id="pledgeForm" onsubmit="submitPledgeForm(event)">
+            
+            <!-- Form Container -->
+            <div id="formContainer" class="form-container">
+                <h2 class="modal-title">Match My Pledge</h2>
+                <form id="pledgeForm" onsubmit="submitPledgeForm(event)">
                 <div class="form-group">
                     <label for="name">Name *</label>
                     <input type="text" id="name" name="name" required placeholder="Enter your name">
@@ -1068,7 +1172,23 @@
                 <div id="formMessage" class="form-message"></div>
                 
                 <button type="submit" class="form-submit-btn" id="submitBtn">Submit Pledge</button>
-            </form>
+                </form>
+            </div>
+            
+            <!-- Thank You Screen -->
+            <div id="thankYouScreen" class="thank-you-screen">
+                <img src="ally-james-thank-you.png" alt="Ally and James" class="thank-you-image">
+                <div class="thank-you-message">
+                    Thank you for your support of Shake On, it means the world to me!
+                </div>
+                <div class="thank-you-signature">
+                    ~Ally Simpson #20
+                </div>
+                <div class="thank-you-actions">
+                    <button type="button" class="thank-you-btn thank-you-btn-primary" onclick="resetForm()">Submit Another Pledge</button>
+                    <a href="/" class="thank-you-btn thank-you-btn-secondary">Return to Website</a>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -1089,14 +1209,33 @@
         function closePledgeModal() {
             document.getElementById('pledgeModal').classList.remove('active');
             document.body.style.overflow = '';
+            // Reset form and show form container
+            resetForm();
+        }
+        
+        function resetForm() {
+            const form = document.getElementById('pledgeForm');
+            const formContainer = document.getElementById('formContainer');
+            const thankYouScreen = document.getElementById('thankYouScreen');
+            const formMessage = document.getElementById('formMessage');
+            
             // Reset form
-            document.getElementById('pledgeForm').reset();
-            document.getElementById('formMessage').className = 'form-message';
-            document.getElementById('formMessage').textContent = '';
+            form.reset();
+            // Reset pledge amount to default value
+            document.getElementById('pledgeAmount').value = '$20 for every point I score, every block I make, and every Sirens win';
+            
+            // Reset message
+            formMessage.className = 'form-message';
+            formMessage.textContent = '';
+            
             // Reset reCAPTCHA
             if (typeof grecaptcha !== 'undefined') {
                 grecaptcha.reset();
             }
+            
+            // Show form, hide thank you screen
+            formContainer.classList.remove('hidden');
+            thankYouScreen.classList.remove('active');
         }
         
         // Close modal when clicking outside
@@ -1157,20 +1296,25 @@
                 
                 // Since we're using no-cors mode, we can't read the response
                 // Assume success if no error is thrown
-                formMessage.className = 'form-message success';
-                formMessage.textContent = 'Thank you! Your pledge has been submitted successfully.';
+                // Show thank you screen
+                const formContainer = document.getElementById('formContainer');
+                const thankYouScreen = document.getElementById('thankYouScreen');
+                
+                formContainer.classList.add('hidden');
+                thankYouScreen.classList.add('active');
+                
+                // Reset form data (but keep it hidden)
                 form.reset();
+                document.getElementById('pledgeAmount').value = '$20 for every point I score, every block I make, and every Sirens win';
                 grecaptcha.reset();
                 
-                // Close modal after 3 seconds
-                setTimeout(() => {
-                    closePledgeModal();
-                }, 3000);
+                // Re-enable submit button (though form is hidden)
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Pledge';
                 
             } catch (error) {
                 formMessage.className = 'form-message error';
                 formMessage.textContent = 'There was an error submitting your pledge. Please try again or email hello@shakeon.org';
-            } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Submit Pledge';
             }
