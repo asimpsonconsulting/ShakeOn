@@ -19,6 +19,10 @@
     <meta property="twitter:title" content="Shake On - Supporting Parkinson's Research">
     <meta property="twitter:description" content="Join me in supporting Parkinson's research. I'm pledging $20 for every point, block, and win this PWHL season to raise $20,000 for The Michael J. Fox Foundation. Let's Shake On together.">
     <meta property="twitter:image" content="https://shakeon.org/SO-WHT_1@3x-8.png">
+    
+    <!-- reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
     <style>
         * {
             margin: 0;
@@ -327,6 +331,192 @@
 
         .contact-btn:active {
             transform: translateY(0);
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(1, 30, 66, 0.95);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            animation: fade-in 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .modal-content {
+            background: #011E42;
+            border: 2px solid #FF5F1F;
+            border-radius: 12px;
+            padding: 2.5rem;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slide-up 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes slide-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255, 95, 31, 0.2);
+            color: #FF5F1F;
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.98);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 400;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 95, 31, 0.3);
+            border-radius: 6px;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FF5F1F;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .recaptcha-container {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        
+        .form-submit-btn {
+            width: 100%;
+            padding: 0.875rem 2.5rem;
+            background: #FF5F1F;
+            color: #FFFFFF;
+            border: 2px solid #FF5F1F;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .form-submit-btn:hover {
+            background: #ff7a3d;
+            border-color: #ff7a3d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 95, 31, 0.4);
+        }
+        
+        .form-submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .form-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+            display: none;
+        }
+        
+        .form-message.success {
+            background: rgba(1, 185, 179, 0.2);
+            border: 1px solid #01B9B3;
+            color: #01B9B3;
+            display: block;
+        }
+        
+        .form-message.error {
+            background: rgba(255, 95, 31, 0.2);
+            border: 1px solid #FF5F1F;
+            color: #FF5F1F;
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 2rem 1.5rem;
+                max-width: 95%;
+            }
+            
+            .modal-title {
+                font-size: 1.5rem;
+            }
         }
         
         .donation-link {
@@ -711,7 +901,7 @@
         
         <!-- Contact Section -->
         <div class="contact-section">
-            <a href="mailto:hello@shakeon.org?subject=I commit to Match your pledge! (enter your name and optional dedication message)" class="contact-btn">Match my pledge</a>
+            <button type="button" class="contact-btn" onclick="openPledgeModal()">Match my pledge</button>
         </div>
         
         <div class="body-text-container">
@@ -843,6 +1033,148 @@
             touchStartX = 0;
             touchStartY = 0;
         });
+    </script>
+    
+    <!-- Pledge Modal -->
+    <div id="pledgeModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closePledgeModal()">&times;</button>
+            <h2 class="modal-title">Match My Pledge</h2>
+            <form id="pledgeForm" onsubmit="submitPledgeForm(event)">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="pledgeAmount">Pledge Amount (Optional)</label>
+                    <input type="text" id="pledgeAmount" name="pledgeAmount" placeholder="e.g., $20 per point, $50 total">
+                </div>
+                
+                <div class="form-group">
+                    <label for="dedication">Dedication Message (Optional)</label>
+                    <textarea id="dedication" name="dedication" placeholder="Share a message or dedication..."></textarea>
+                </div>
+                
+                <div class="recaptcha-container">
+                    <div class="g-recaptcha" data-sitekey="6LeKP1UsAAAAAOl_EfeyvHIDXoJfD8n2SP3Qmx5x"></div>
+                </div>
+                
+                <div id="formMessage" class="form-message"></div>
+                
+                <button type="submit" class="form-submit-btn" id="submitBtn">Submit Pledge</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Google Apps Script Web App URL
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz1nAPFNXPtLXvOcs0g8SOiUlKtFjCdy7tq6go4vvhn6b0Z9_VGjZZgbENa1X4ZDGflxw/exec';
+        
+        function openPledgeModal() {
+            const modal = document.getElementById('pledgeModal');
+            if (!modal) {
+                console.error('Modal not found!');
+                return;
+            }
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closePledgeModal() {
+            document.getElementById('pledgeModal').classList.remove('active');
+            document.body.style.overflow = '';
+            // Reset form
+            document.getElementById('pledgeForm').reset();
+            document.getElementById('formMessage').className = 'form-message';
+            document.getElementById('formMessage').textContent = '';
+            // Reset reCAPTCHA
+            if (typeof grecaptcha !== 'undefined') {
+                grecaptcha.reset();
+            }
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('pledgeModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePledgeModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('pledgeModal').classList.contains('active')) {
+                closePledgeModal();
+            }
+        });
+        
+        async function submitPledgeForm(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const formMessage = document.getElementById('formMessage');
+            const form = document.getElementById('pledgeForm');
+            
+            // Validate reCAPTCHA
+            const recaptchaResponse = grecaptcha.getResponse();
+            if (!recaptchaResponse) {
+                formMessage.className = 'form-message error';
+                formMessage.textContent = 'Please complete the reCAPTCHA verification.';
+                return;
+            }
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            formMessage.className = 'form-message';
+            formMessage.textContent = '';
+            
+            // Get form data
+            const formData = new FormData(form);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                pledgeAmount: formData.get('pledgeAmount') || '',
+                dedication: formData.get('dedication') || '',
+                recaptcha: recaptchaResponse,
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                // Since we're using no-cors mode, we can't read the response
+                // Assume success if no error is thrown
+                formMessage.className = 'form-message success';
+                formMessage.textContent = 'Thank you! Your pledge has been submitted successfully.';
+                form.reset();
+                grecaptcha.reset();
+                
+                // Close modal after 3 seconds
+                setTimeout(() => {
+                    closePledgeModal();
+                }, 3000);
+                
+            } catch (error) {
+                formMessage.className = 'form-message error';
+                formMessage.textContent = 'There was an error submitting your pledge. Please try again or email hello@shakeon.org';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Pledge';
+            }
+        }
     </script>
 </body>
 </html>
