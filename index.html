@@ -24,6 +24,12 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     
     <style>
+        :root {
+            --color-navy: #011E42;
+            --color-orange: #FF5F1F;
+            --color-teal: #01B9B3;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -60,6 +66,7 @@
         .orb3 { width: 250px; height: 250px; top: 50%; left: 5%; animation-delay: 3s; }
         .orb4 { width: 450px; height: 450px; top: 10%; right: 10%; animation-delay: 12s; }
         .orb5 { width: 300px; height: 300px; bottom: 20%; left: 50%; animation-delay: 5s; }
+        .orb6 { width: 200px; height: 200px; top: 60%; right: 15%; animation-delay: 9s; background: rgba(1, 185, 179, 0.12); }
 
         @keyframes float-orb {
             0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
@@ -690,8 +697,8 @@
 
         .social-heading {
             font-size: 0.875rem;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 300;
+            color: var(--color-teal);
+            font-weight: 500;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             margin-bottom: 1.5rem;
@@ -746,13 +753,13 @@
         }
 
         .social-link:hover .social-icon {
-            background: rgba(255, 95, 31, 0.2);
-            border-color: #FF5F1F;
-            box-shadow: 0 6px 20px rgba(255, 95, 31, 0.3);
+            background: rgba(1, 185, 179, 0.2);
+            border-color: var(--color-teal);
+            box-shadow: 0 6px 20px rgba(1, 185, 179, 0.3);
         }
 
         .social-link:hover .social-icon svg {
-            fill: #FF5F1F;
+            fill: var(--color-teal);
         }
 
         .social-label {
@@ -794,8 +801,8 @@
         }
         
         .pwhl-link:hover {
-            background: rgba(255, 95, 31, 0.1);
-            border-color: rgba(255, 95, 31, 0.4);
+            background: rgba(1, 185, 179, 0.08);
+            border-color: rgba(1, 185, 179, 0.4);
             transform: translateY(-3px);
             color: rgba(255, 255, 255, 0.95);
         }
@@ -822,7 +829,7 @@
         }
         
         .pwhl-link:hover .pwhl-logo .pwhl-cls-1 {
-            fill: #FF5F1F;
+            fill: var(--color-teal);
         }
         
         .pwhl-info {
@@ -848,7 +855,7 @@
         .pwhl-team {
             font-size: 1rem;
             font-weight: 500;
-            color: #FF5F1F;
+            color: var(--color-teal);
             margin-top: 0.25rem;
         }
 
@@ -1081,6 +1088,168 @@
             }
         }
 
+        /* Story Section - 2 equal columns: Ally image left | Total Raised + Story right */
+        .story-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            align-items: stretch;
+            max-width: 1200px;
+            margin: 2.5rem auto 3rem;
+            position: relative;
+            z-index: 20;
+            animation: fade-in 1.2s ease-in-out 1s both;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .story-image-column {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+        
+        .story-content-column {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            border-left: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        .spotlight-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .spotlight-caption {
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 400;
+            text-align: left;
+            letter-spacing: 0.03em;
+        }
+        
+        /* Fundraising totals when inside story section */
+        .fundraising-totals-inline {
+            max-width: none;
+            margin: 0;
+            padding: 1.25rem 1.5rem;
+        }
+        
+        .story-section .body-text-container {
+            margin: 0;
+            max-width: none;
+            flex: 1;
+        }
+        
+        .story-section .body-text {
+            grid-template-columns: 1fr;
+        }
+        
+        .story-section .body-text p:nth-child(3) {
+            grid-column: 1;
+            text-align: left;
+        }
+        
+        @media (max-width: 968px) {
+            .story-section {
+                grid-template-columns: 1fr;
+                gap: 0;
+                margin: 2rem auto 2.5rem;
+            }
+            
+            .story-image-column {
+                padding: 2rem 2rem 0;
+            }
+            
+            .story-content-column {
+                padding: 2rem;
+                border-left: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.06);
+            }
+            
+            .spotlight-caption {
+                text-align: center;
+            }
+            
+            .story-section .body-text p:nth-child(3) {
+                text-align: center;
+            }
+        }
+
+        /* Dedication Carousel - with teal accent */
+        .carousel-section {
+            margin: 3rem auto;
+            max-width: 800px;
+            position: relative;
+            z-index: 20;
+            animation: fade-in 1.2s ease-in-out 1.2s both;
+        }
+        
+        .carousel-heading {
+            font-size: 0.875rem;
+            color: var(--color-teal);
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid rgba(1, 185, 179, 0.3);
+            background: rgba(1, 185, 179, 0.04);
+        }
+        
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            min-height: 200px;
+            padding: 2rem 2.5rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .carousel-quote {
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .carousel-author {
+            font-size: 0.95rem;
+            color: var(--color-teal);
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .carousel-slide {
+                padding: 1.5rem 1.5rem;
+            }
+        }
+
         /* Reduce motion for accessibility */
         @media (prefers-reduced-motion: reduce) {
             *,
@@ -1101,6 +1270,7 @@
         <div class="orb orb3"></div>
         <div class="orb orb4"></div>
         <div class="orb orb5"></div>
+        <div class="orb orb6"></div>
     </div>
 
     <!-- Main content -->
@@ -1116,31 +1286,125 @@
             <a href="https://give.michaeljfox.org/fundraiser/6816216" target="_blank" rel="noopener noreferrer" class="donation-btn">Make a one-time donation</a>
         </div>
         
-        <!-- PREVIEW: Fundraising Totals - Update values in script below when ready to go live -->
-        <div class="fundraising-totals" id="fundraisingTotals">
-            <div class="fundraising-totals-label">Total Raised</div>
-            <div class="fundraising-total-box">
-                <span class="fundraising-total-amount" id="fundraisingTotalAmount">$9,819</span>
+        <!-- Story Section: Ally image left | Total Raised + Story right (equal-height columns) -->
+        <div class="story-section">
+            <div class="story-image-column">
+                <img src="ally-simpson-spotlight.png" alt="Ally Simpson #20 of the New York Sirens acknowledging the crowd at a PWHL game" class="spotlight-image">
+                <p class="spotlight-caption">Ally Simpson #20 — New York Sirens, PWHL</p>
             </div>
-            <div class="fundraising-breakdown">
-                <div class="fundraising-breakdown-item">
-                    <span class="fundraising-breakdown-label">Pledge Matches</span>
-                    <span class="fundraising-breakdown-amount" id="fundraisingPledgeMatches">$7,140</span>
+            <div class="story-content-column">
+                <!-- Fundraising Totals - Update values in script below -->
+                <div class="fundraising-totals fundraising-totals-inline" id="fundraisingTotals">
+                    <div class="fundraising-totals-label">Total Raised</div>
+                    <div class="fundraising-total-box">
+                        <span class="fundraising-total-amount" id="fundraisingTotalAmount">$9,819</span>
+                        <div class="fundraising-goal">Goal: $20K</div>
+                    </div>
+                    <div class="fundraising-breakdown">
+                        <div class="fundraising-breakdown-item">
+                            <span class="fundraising-breakdown-label">Pledge Matches</span>
+                            <span class="fundraising-breakdown-amount" id="fundraisingPledgeMatches">$7,140</span>
+                        </div>
+                        <div class="fundraising-breakdown-item">
+                            <span class="fundraising-breakdown-label">One-Time Donations</span>
+                            <span class="fundraising-breakdown-amount" id="fundraisingOneTime">$3,600</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="fundraising-breakdown-item">
-                    <span class="fundraising-breakdown-label">One-Time Donations</span>
-                    <span class="fundraising-breakdown-amount" id="fundraisingOneTime">$3,600</span>
+                <div class="body-text-container">
+                    <div class="body-text">
+                        <p>Ten years ago, my dad James was diagnosed with Parkinson's disease. If you know someone with Parkinson's, you know how it changes everything — not just for them, but for the whole family. My dad has always been my biggest supporter. He's the reason I fell in love with hockey, the reason I kept pushing through every challenge to get here. Since his diagnosis, he's adopted a phrase that's become our family mantra: Shake On — a reminder to keep moving forward, no matter what.</p>
+                        
+                        <p>This season, I wanted to find a way to use my platform as a professional hockey player for something bigger than the game. So I'm launching Shake On. I play defense for the New York Sirens in the PWHL, and I wear number 20. This season, I'm personally pledging $20 for every point I score, every block I make, and every Sirens win — all going to The Michael J. Fox Foundation for Parkinson's research. My goal is to raise $20,000 — 20 for #20.</p>
+                        
+                        <p>More than 6 million people worldwide live with Parkinson's, and there's still no cure. But research is making progress, and every dollar helps.You can join me by pledging alongside me this season, or by making a one-time donation right here. 100% of what you give goes directly to MJFF's research efforts. Let's Shake On together.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <div class="body-text-container">
-            <div class="body-text">
-                <p>Ten years ago, my dad James was diagnosed with Parkinson's disease. If you know someone with Parkinson's, you know how it changes everything — not just for them, but for the whole family. My dad has always been my biggest supporter. He's the reason I fell in love with hockey, the reason I kept pushing through every challenge to get here. Since his diagnosis, he's adopted a phrase that's become our family mantra: Shake On — a reminder to keep moving forward, no matter what.</p>
-                
-                <p>This season, I wanted to find a way to use my platform as a professional hockey player for something bigger than the game. So I'm launching Shake On. I play defense for the New York Sirens in the PWHL, and I wear number 20. This season, I'm personally pledging $20 for every point I score, every block I make, and every Sirens win — all going to The Michael J. Fox Foundation for Parkinson's research. My goal is to raise $20,000 — 20 for #20.</p>
-                
-                <p>More than 6 million people worldwide live with Parkinson's, and there's still no cure. But research is making progress, and every dollar helps.You can join me by pledging alongside me this season, or by making a one-time donation right here. 100% of what you give goes directly to MJFF's research efforts. Let's Shake On together.</p>
+
+        <!-- Dedication Messages Carousel -->
+        <div class="carousel-section">
+            <p class="carousel-heading">Support and dedication messages</p>
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="dedicationTrack">
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"College Career Action is happy to support this great cause, go #20!"</p>
+                        <p class="carousel-author">— Kurt</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"Pledge match - go Ally, Shake On!"</p>
+                        <p class="carousel-author">— Matt</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"Donation of $202 raised from 50/50 raffle held at The Echo's meetup before the DC Takeover Game to support Shake On , Ally and the Simpson family  The Echo proudly supports the extremely important work of ShakeOn.org and will continue to lead fundraising efforts for the organization throughout the season and beyond. In addition to raffles, we will donate $1 per every Echo chant sign sold to Shake On."</p>
+                        <p class="carousel-author">— The Echo</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"I heard about this during the Devils game. I'm happy to donate to such a great cause."</p>
+                        <p class="carousel-author">— Michael</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"Thanks to the New Jersey Devils announcers!!"</p>
+                        <p class="carousel-author">— James</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"Hey Ally! first off, miss you. This is so incredible what you are doing. You and your family have such kind hearts. Seeing your dad at the rink, with a smile, always made my day. And your mom always gave the best hugs. Anyways, this cause is so important and bringing awareness to parkinson research will change lives! Keep doing what you are doing and can't wait to see what else you accomplish. Cheering you on from a far!"</p>
+                        <p class="carousel-author">— Tessa</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"Shake On James!!!"</p>
+                        <p class="carousel-author">— Jim</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"This is Amazing! Shake On!!"</p>
+                        <p class="carousel-author">— Dannette</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"What a great idea!Nancy Crowe & Eichfeld Family"</p>
+                        <p class="carousel-author">— Nancy</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"For the best memes!"</p>
+                        <p class="carousel-author">— Tanner</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"SHAKE ON Mr. James! XOXOXO"</p>
+                        <p class="carousel-author">— Team Smig</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"Love you Gator!"</p>
+                        <p class="carousel-author">— Maureen</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"❤️"</p>
+                        <p class="carousel-author">— Paige</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"Shake on!! Go team Simpson!!"</p>
+                        <p class="carousel-author">— Sammy</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"Love supporting good causes."</p>
+                        <p class="carousel-author">— Hannah</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"In honor of my Dad, Michael Weisman."</p>
+                        <p class="carousel-author">— Benjamin</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"I am a Sirens season ticket member, and hearing more about this initiative and seeing the lineup read from the takeover tour game has inspired me to want to support even more. I participate in many races and competitions throughout the course of the year - the key ones for me so far on the calendar for 2026 are the Jersey City Marathon, Ironman Lake Placid, Ironman Ottawa, and the NYC Marathon as well as a number of other races along the way. I had been trying to think of a way to race for more than myself, and Shake On seems like the perfect way to do it! So, in addition to matching Ally's pledge, I am also pledging $5 per mile I bike, $10 per mile I run and $20 per mile I swim for ALL of the races I do in 2026. I hope to be able to meet at some point at one of the Sirens games this season and look forward to supporting Shake On!"</p>
+                        <p class="carousel-author">— Matthew</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"As a loyal PWHL fan, I heard the plan that Allyson had and couldn't help but join the pledge!"</p>
+                        <p class="carousel-author">— Seth</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"Dedicated to: my grandpa, Harvey Knoche"</p>
+                        <p class="carousel-author">— Alison</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1203,7 +1467,7 @@
         const FUNDRAISING_TOTALS = {
             totalRaised: '$9,819',
             pledgeMatches: '$7,140',
-            oneTimeDonations: '$2,679'
+            oneTimeDonations: '$3,600'
         };
         // Populate fundraising totals on load
         document.addEventListener('DOMContentLoaded', function() {
@@ -1213,7 +1477,28 @@
             if (totalEl) totalEl.textContent = FUNDRAISING_TOTALS.totalRaised;
             if (pledgeEl) pledgeEl.textContent = FUNDRAISING_TOTALS.pledgeMatches;
             if (oneTimeEl) oneTimeEl.textContent = FUNDRAISING_TOTALS.oneTimeDonations;
+            
+            // Dedication carousel
+            initDedicationCarousel();
         });
+        
+        function initDedicationCarousel() {
+            const track = document.getElementById('dedicationTrack');
+            const slides = track ? track.querySelectorAll('.carousel-slide') : [];
+            
+            if (slides.length === 0) return;
+            
+            let currentIndex = 0;
+            
+            function goToSlide(index) {
+                currentIndex = ((index % slides.length) + slides.length) % slides.length;
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+            
+            function nextSlide() { goToSlide(currentIndex + 1); }
+            
+            setInterval(nextSlide, 6000);
+        }
         
         // Parallax effect on mouse move
         document.addEventListener('mousemove', (e) => {
