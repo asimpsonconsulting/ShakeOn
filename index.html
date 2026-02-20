@@ -1002,6 +1002,85 @@
             }
         }
 
+        /* Fundraising Totals Component - easily updatable */
+        .fundraising-totals {
+            max-width: 520px;
+            margin: 2.5rem auto 3rem;
+            padding: 2rem 2.25rem;
+            background: rgba(1, 185, 179, 0.08);
+            border: 1px solid rgba(255, 95, 31, 0.25);
+            border-radius: 16px;
+            text-align: center;
+            position: relative;
+            z-index: 20;
+            animation: fade-in 1.2s ease-in-out 0.8s both;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .fundraising-totals-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.75rem;
+        }
+        
+        .fundraising-total-box {
+            background: #FF5F1F;
+            border-radius: 12px;
+            padding: 1.25rem 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(255, 95, 31, 0.35);
+        }
+        
+        .fundraising-total-amount {
+            font-size: clamp(2.25rem, 5vw, 3rem);
+            font-weight: 700;
+            color: #EDECE6;
+            letter-spacing: 0.02em;
+        }
+        
+        .fundraising-breakdown {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+        
+        .fundraising-breakdown-item {
+            padding: 1rem;
+            background: rgba(1, 30, 66, 0.4);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .fundraising-breakdown-label {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 0.5rem;
+        }
+        
+        .fundraising-breakdown-amount {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            font-weight: 700;
+            color: #EDECE6;
+        }
+        
+        @media (max-width: 480px) {
+            .fundraising-totals {
+                padding: 1.5rem 1.25rem;
+                margin: 2rem auto 2.5rem;
+            }
+            
+            .fundraising-breakdown {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Reduce motion for accessibility */
         @media (prefers-reduced-motion: reduce) {
             *,
@@ -1033,8 +1112,26 @@
         
         <!-- Contact Section -->
         <div class="contact-section">
-            <button type="button" class="contact-btn" onclick="openPledgeModal()">Match my pledge for '25-'26 Season</button>
+            <button type="button" class="contact-btn" onclick="openPledgeModal()">Match my pledge for this Season</button>
             <a href="https://give.michaeljfox.org/fundraiser/6816216" target="_blank" rel="noopener noreferrer" class="donation-btn">Make a one-time donation</a>
+        </div>
+        
+        <!-- PREVIEW: Fundraising Totals - Update values in script below when ready to go live -->
+        <div class="fundraising-totals" id="fundraisingTotals">
+            <div class="fundraising-totals-label">Total Raised</div>
+            <div class="fundraising-total-box">
+                <span class="fundraising-total-amount" id="fundraisingTotalAmount">$9,819</span>
+            </div>
+            <div class="fundraising-breakdown">
+                <div class="fundraising-breakdown-item">
+                    <span class="fundraising-breakdown-label">Pledge Matches</span>
+                    <span class="fundraising-breakdown-amount" id="fundraisingPledgeMatches">$7,140</span>
+                </div>
+                <div class="fundraising-breakdown-item">
+                    <span class="fundraising-breakdown-label">One-Time Donations</span>
+                    <span class="fundraising-breakdown-amount" id="fundraisingOneTime">$3,600</span>
+                </div>
+            </div>
         </div>
         
         <div class="body-text-container">
@@ -1102,6 +1199,22 @@
     </div>
 
     <script>
+        // ========== FUNDRAISING TOTALS - Update these values to refresh the display ==========
+        const FUNDRAISING_TOTALS = {
+            totalRaised: '$9,819',
+            pledgeMatches: '$7,140',
+            oneTimeDonations: '$2,679'
+        };
+        // Populate fundraising totals on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const totalEl = document.getElementById('fundraisingTotalAmount');
+            const pledgeEl = document.getElementById('fundraisingPledgeMatches');
+            const oneTimeEl = document.getElementById('fundraisingOneTime');
+            if (totalEl) totalEl.textContent = FUNDRAISING_TOTALS.totalRaised;
+            if (pledgeEl) pledgeEl.textContent = FUNDRAISING_TOTALS.pledgeMatches;
+            if (oneTimeEl) oneTimeEl.textContent = FUNDRAISING_TOTALS.oneTimeDonations;
+        });
+        
         // Parallax effect on mouse move
         document.addEventListener('mousemove', (e) => {
             const logo = document.getElementById('logo');

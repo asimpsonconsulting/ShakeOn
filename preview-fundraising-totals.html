@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview: Fundraising Totals - Shake On</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #011E42;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .preview-banner {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            padding: 0.75rem;
+            background: rgba(255, 95, 31, 0.15);
+            border: 1px dashed #FF5F1F;
+            border-radius: 8px;
+        }
+        .preview-banner strong { color: #FF5F1F; }
+        
+        /* Fundraising Totals Component */
+        .fundraising-totals {
+            max-width: 520px;
+            margin: 2.5rem auto 3rem;
+            padding: 2rem 2.25rem;
+            background: rgba(1, 185, 179, 0.08);
+            border: 1px solid rgba(255, 95, 31, 0.25);
+            border-radius: 16px;
+            text-align: center;
+            position: relative;
+            z-index: 20;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .fundraising-totals-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.75rem;
+        }
+        
+        .fundraising-total-box {
+            background: #FF5F1F;
+            border-radius: 12px;
+            padding: 1.25rem 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(255, 95, 31, 0.35);
+        }
+        
+        .fundraising-total-amount {
+            font-size: clamp(2.25rem, 5vw, 3rem);
+            font-weight: 700;
+            color: #EDECE6;
+            letter-spacing: 0.02em;
+        }
+        
+        .fundraising-breakdown {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+        
+        .fundraising-breakdown-item {
+            padding: 1rem;
+            background: rgba(1, 30, 66, 0.4);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .fundraising-breakdown-label {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 0.5rem;
+        }
+        
+        .fundraising-breakdown-amount {
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            font-weight: 700;
+            color: #EDECE6;
+        }
+        
+        @media (max-width: 480px) {
+            .fundraising-totals {
+                padding: 1.5rem 1.25rem;
+                margin: 2rem auto 2.5rem;
+            }
+            .fundraising-breakdown {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        .back-link:hover { color: #FF5F1F; }
+    </style>
+</head>
+<body>
+    <div class="preview-banner">
+        <strong>PREVIEW MODE</strong> — This is how the fundraising totals component will appear on the homepage. 
+        Open <code>index.html</code> in a browser to see it in full context.
+    </div>
+    
+    <div class="fundraising-totals">
+        <div class="fundraising-totals-label">Total Raised</div>
+        <div class="fundraising-total-box">
+            <span class="fundraising-total-amount">$9,819</span>
+        </div>
+        <div class="fundraising-breakdown">
+            <div class="fundraising-breakdown-item">
+                <span class="fundraising-breakdown-label">Pledge Matches</span>
+                <span class="fundraising-breakdown-amount">$7,140</span>
+            </div>
+            <div class="fundraising-breakdown-item">
+                <span class="fundraising-breakdown-label">One-Time Donations</span>
+                <span class="fundraising-breakdown-amount">$3,600</span>
+            </div>
+        </div>
+    </div>
+    
+    <p style="text-align: center;">
+        <a href="index.html" class="back-link">← Back to full site</a>
+    </p>
+</body>
+</html>
