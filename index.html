@@ -1492,14 +1492,48 @@
             
             if (slides.length === 0) return;
             
-            let currentIndex = 0;
+            // Clone first slide and append for seamless loop from last to first
+            const firstClone = slides[0].cloneNode(true);
+            firstClone.classList.add('carousel-slide-clone');
+            track.appendChild(firstClone);
+            const totalSlides = slides.length + 1;
             
-            function goToSlide(index) {
-                currentIndex = ((index % slides.length) + slides.length) % slides.length;
-                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            let currentIndex = 0;
+            let isTransitioning = false;
+            
+            function goToSlide(index, instant) {
+                if (instant) {
+                    track.style.transition = 'none';
+                    currentIndex = index;
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    track.offsetHeight; // Force reflow
+                    track.style.transition = '';
+                } else {
+                    currentIndex = index;
+                    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }
             }
             
-            function nextSlide() { goToSlide(currentIndex + 1); }
+            function nextSlide() {
+                if (isTransitioning) return;
+                
+                if (currentIndex === slides.length - 1) {
+                    // Moving to clone of first slide - smooth transition
+                    isTransitioning = true;
+                    goToSlide(slides.length, false);
+                } else {
+                    goToSlide((currentIndex + 1) % slides.length, false);
+                }
+            }
+            
+            track.addEventListener('transitionend', function(e) {
+                if (e.propertyName !== 'transform') return;
+                if (currentIndex === slides.length) {
+                    // Just showed clone - instantly jump back to real first slide
+                    goToSlide(0, true);
+                }
+                isTransitioning = false;
+            });
             
             setInterval(nextSlide, 6000);
         }
