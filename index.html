@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+rs<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1048,6 +1048,70 @@
             letter-spacing: 0.02em;
         }
         
+        .fundraising-goal {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(237, 236, 230, 0.9);
+            margin-top: 0.35rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .fundraising-percent {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: rgba(237, 236, 230, 0.95);
+            margin-top: 0.25rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .fundraising-games-link {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-align: center;
+        }
+        
+        .fundraising-games-link:hover {
+            color: var(--color-teal);
+        }
+        
+        .fundraising-games-link .games-number {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--color-teal);
+        }
+        
+        .next-game-link {
+            display: block;
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-align: center;
+        }
+        
+        .next-game-link:hover {
+            color: var(--color-teal);
+        }
+        
+        .track-sirens-link {
+            flex-basis: 100%;
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--color-orange);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .track-sirens-link:hover {
+            color: #ff7a3d;
+        }
+        
         .fundraising-breakdown {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1288,6 +1352,7 @@
         <div class="contact-section">
             <button type="button" class="contact-btn" onclick="openPledgeModal()">Match my pledge for this Season</button>
             <a href="https://give.michaeljfox.org/fundraiser/6816216" target="_blank" rel="noopener noreferrer" class="donation-btn">Make a one-time donation</a>
+            <a href="https://www.thepwhl.com/en/teams/new-york-sirens" target="_blank" rel="noopener noreferrer" class="track-sirens-link">Track the New York Sirens this Season!</a>
         </div>
         
         <!-- Story Section: Ally image left | Total Raised + Story right (equal-height columns) -->
@@ -1301,19 +1366,22 @@
                 <div class="fundraising-totals fundraising-totals-inline" id="fundraisingTotals">
                     <div class="fundraising-totals-label">Total Raised</div>
                     <div class="fundraising-total-box">
-                        <span class="fundraising-total-amount" id="fundraisingTotalAmount">$10,800</span>
+                        <span class="fundraising-total-amount" id="fundraisingTotalAmount">$11,410</span>
                         <div class="fundraising-goal">Goal: $20K</div>
+                        <div class="fundraising-percent" id="fundraisingPercent">57.1% to goal</div>
                     </div>
                     <div class="fundraising-breakdown">
                         <div class="fundraising-breakdown-item">
                             <span class="fundraising-breakdown-label">Pledge Matches</span>
-                            <span class="fundraising-breakdown-amount" id="fundraisingPledgeMatches">$7,200</span>
+                            <span class="fundraising-breakdown-amount" id="fundraisingPledgeMatches">$7,660</span>
                         </div>
                         <div class="fundraising-breakdown-item">
                             <span class="fundraising-breakdown-label">One-Time Donations</span>
-                            <span class="fundraising-breakdown-amount" id="fundraisingOneTime">$3,600</span>
+                            <span class="fundraising-breakdown-amount" id="fundraisingOneTime">$3,750</span>
                         </div>
                     </div>
+                    <a href="https://www.thepwhl.com/en/teams/new-york-sirens/schedule-25-26" target="_blank" rel="noopener noreferrer" class="fundraising-games-link"><span class="games-number">13</span>&nbsp;Regular Season Games remaining</a>
+                    <a href="https://www.thepwhl.com/en/stats/game-center/278" target="_blank" rel="noopener noreferrer" class="next-game-link">Next Up: New York Sirens vs Boston Fleet March 5 at 7 pm EST</a>
                 </div>
                 <div class="body-text-container">
                     <div class="body-text">
@@ -1469,18 +1537,21 @@
     <script>
         // ========== FUNDRAISING TOTALS - Update these values to refresh the display ==========
         const FUNDRAISING_TOTALS = {
-            totalRaised: '$10,800',
-            pledgeMatches: '$7,200',
-            oneTimeDonations: '$3,600'
+            totalRaised: '$11,410',
+            pledgeMatches: '$7,660',
+            oneTimeDonations: '$3,750',
+            percentToGoal: '57.1%'
         };
         // Populate fundraising totals on load
         document.addEventListener('DOMContentLoaded', function() {
             const totalEl = document.getElementById('fundraisingTotalAmount');
             const pledgeEl = document.getElementById('fundraisingPledgeMatches');
             const oneTimeEl = document.getElementById('fundraisingOneTime');
+            const percentEl = document.getElementById('fundraisingPercent');
             if (totalEl) totalEl.textContent = FUNDRAISING_TOTALS.totalRaised;
             if (pledgeEl) pledgeEl.textContent = FUNDRAISING_TOTALS.pledgeMatches;
             if (oneTimeEl) oneTimeEl.textContent = FUNDRAISING_TOTALS.oneTimeDonations;
+            if (percentEl) percentEl.textContent = FUNDRAISING_TOTALS.percentToGoal + ' to goal';
             
             // Dedication carousel
             initDedicationCarousel();
