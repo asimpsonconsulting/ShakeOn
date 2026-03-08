@@ -1855,9 +1855,9 @@
         <div class="fundraising-totals totals-column" id="fundraisingTotals">
             <div class="fundraising-totals-label">Total Raised</div>
             <div class="fundraising-total-box">
-                <span class="fundraising-total-amount" id="fundraisingTotalAmount">$12,090</span>
+                <span class="fundraising-total-amount" id="fundraisingTotalAmount">$12,115</span>
                 <div class="fundraising-goal">Goal: $20K</div>
-                <div class="fundraising-percent" id="fundraisingPercent">60.5% to goal</div>
+                <div class="fundraising-percent" id="fundraisingPercent">60.6% to goal</div>
             </div>
             <div class="fundraising-breakdown">
                 <div class="fundraising-breakdown-item">
@@ -1866,7 +1866,7 @@
                 </div>
                 <div class="fundraising-breakdown-item">
                     <span class="fundraising-breakdown-label">One-Time Donations</span>
-                    <span class="fundraising-breakdown-amount" id="fundraisingOneTime">$3,750</span>
+                    <span class="fundraising-breakdown-amount" id="fundraisingOneTime">$3,775</span>
                 </div>
             </div>
             <a href="https://www.thepwhl.com/en/teams/new-york-sirens/schedule-25-26" target="_blank" rel="noopener noreferrer" class="fundraising-games-link"><span class="games-number">12</span>&nbsp;Regular Season Games remaining</a>
@@ -2089,10 +2089,10 @@
 
         // ========== FUNDRAISING TOTALS - Update these values to refresh the display ==========
         const FUNDRAISING_TOTALS = {
-            totalRaised: '$12,090',
+            totalRaised: '$12,115',
             pledgeMatches: '$8,340',
-            oneTimeDonations: '$3,750',
-            percentToGoal: '60.5%'
+            oneTimeDonations: '$3,775',
+            percentToGoal: '60.6%'
         };
         // Populate fundraising totals on load
         document.addEventListener('DOMContentLoaded', function() {
@@ -2388,13 +2388,11 @@
             };
             
             try {
+                const formBody = new URLSearchParams();
+                formBody.append('data', JSON.stringify(data));
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
+                    body: formBody
                 });
                 
                 // Since we're using no-cors mode, we can't read the response
