@@ -107,6 +107,11 @@
             margin-bottom: 1rem;
             overflow: hidden;
         }
+        @media (max-width: 640px) {
+            .story-carousel {
+                height: 680px;
+            }
+        }
         .story-carousel-slide {
             position: absolute;
             top: 0;
@@ -322,7 +327,7 @@
         }
         .gwyn-btn-secondary:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); }
         @media (max-width: 640px) {
-            .hero-slide-gwyn .hero-slide-inner { margin-left: 1.25rem; padding: 1.5rem 1.25rem 1.5rem 1rem; }
+            .hero-slide-gwyn .hero-slide-inner { margin-left: 1.25rem; padding: 1.5rem 1.25rem 2.5rem 1rem; }
             .gwyn-headline { font-size: 38px; }
         }
 
@@ -472,7 +477,7 @@
             font-style: italic;
         }
         @media (max-width: 640px) {
-            .hero-slide-ally .hero-slide-inner { margin-left: 1.25rem; padding: 1.5rem 1.25rem 1.5rem 1rem; }
+            .hero-slide-ally .hero-slide-inner { margin-left: 1.25rem; padding: 1.5rem 1.25rem 2.5rem 1rem; }
             .ally-headline { font-size: 38px; }
             .ally-pledge-tiles { gap: 8px; }
             .ally-pledge-tile .amount { font-size: 26px; }
