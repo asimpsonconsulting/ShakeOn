@@ -20,6 +20,9 @@
     <meta property="twitter:description" content="Join me in supporting Parkinson's research. I'm pledging $20 for every point, block, and win this PWHL season to raise $20,000 for The Michael J. Fox Foundation. Let's Shake On together.">
     <meta property="twitter:image" content="https://shakeon.org/SO-WHT_1@3x-8.png">
     
+    <!-- Fonts for Gwyn hero -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
     <!-- reCAPTCHA -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     
@@ -95,6 +98,384 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* ── Rotating Story Section Carousel (Ally hero ↔ Gwyn hero) ── */
+        .story-carousel {
+            position: relative;
+            height: 520px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        .story-carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 0;
+            transition: opacity 0.6s ease;
+        }
+        .story-carousel-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 2;
+        }
+        .story-carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 1.5rem 0 1rem;
+            z-index: 30;
+            position: relative;
+        }
+        .story-carousel-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .story-carousel-indicator:hover {
+            background: rgba(255, 255, 255, 0.7);
+        }
+        .story-carousel-indicator.active {
+            background: var(--color-orange);
+            transform: scale(1.2);
+        }
+
+        /* ── Gwyn Hero Slide (with background image) ── */
+        .hero-slide-gwyn {
+            height: 100%;
+            min-height: 480px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #011E42;
+        }
+        .hero-slide-gwyn .gwyn-hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/gwyn-save-hero.png');
+            background-size: cover;
+            background-position: center 85%;
+            transform: scale(1.05);
+            animation: gwynSlowZoom 20s ease-in-out infinite alternate;
+        }
+        @keyframes gwynSlowZoom {
+            from { transform: scale(1.05); }
+            to { transform: scale(1.12); }
+        }
+        .hero-slide-gwyn .gwyn-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                105deg,
+                rgba(1, 30, 66, 0.97) 0%,
+                rgba(1, 30, 66, 0.88) 38%,
+                rgba(1, 30, 66, 0.45) 60%,
+                rgba(1, 30, 66, 0.20) 100%
+            );
+        }
+        .hero-slide-gwyn .hero-slide-inner {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto 0 2rem;
+            padding: 2.5rem 2rem 2.5rem 1.5rem;
+            text-align: left;
+        }
+        .gwyn-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--color-orange);
+            margin-bottom: 14px;
+        }
+        .gwyn-eyebrow::before {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 2px;
+            background: var(--color-orange);
+        }
+        .gwyn-game-badge {
+            display: inline-block;
+            background: rgba(255,95,31,0.12);
+            border: 1px solid rgba(255,95,31,0.35);
+            border-radius: 4px;
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-orange);
+            margin-bottom: 18px;
+        }
+        .gwyn-headline {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(42px, 6vw, 64px);
+            line-height: 0.92;
+            letter-spacing: 0.02em;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .gwyn-headline .accent { color: var(--color-orange); }
+        .gwyn-headline-sub {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2.2vw, 22px);
+            color: rgba(255,255,255,0.72);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        .gwyn-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #01783E, var(--color-teal));
+            border-radius: 2px;
+            margin-bottom: 20px;
+        }
+        .gwyn-pledge-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(1, 120, 62, 0.15);
+            border: 1px solid rgba(1, 120, 62, 0.4);
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+        }
+        .gwyn-pledge-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 48px;
+            line-height: 1;
+            color: #01783E;
+        }
+        .gwyn-pledge-number span {
+            font-size: 24px;
+            vertical-align: super;
+            color: var(--color-teal);
+        }
+        .gwyn-pledge-detail {
+            border-left: 2px solid rgba(1,185,179,0.3);
+            padding-left: 16px;
+        }
+        .gwyn-pledge-detail strong {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .gwyn-pledge-detail p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.5;
+            max-width: 280px;
+        }
+        .gwyn-body-copy {
+            font-size: 14px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 520px;
+            margin-bottom: 24px;
+        }
+        .gwyn-body-copy em {
+            color: rgba(255,255,255,0.95);
+            font-style: italic;
+        }
+        .gwyn-cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .gwyn-cta-row .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .gwyn-cta-row .btn:hover { transform: translateY(-2px); }
+        .gwyn-btn-primary {
+            background: var(--color-orange);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(255,95,31,0.35);
+        }
+        .gwyn-btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 1.5px solid rgba(255,255,255,0.35);
+        }
+        .gwyn-btn-secondary:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); }
+        @media (max-width: 640px) {
+            .hero-slide-gwyn .hero-slide-inner { margin-left: 1.25rem; padding: 1.5rem 1.25rem 1.5rem 1rem; }
+            .gwyn-headline { font-size: 38px; }
+        }
+
+        /* ── Ally Hero Slide (with background image) ── */
+        .hero-slide-ally {
+            height: 100%;
+            min-height: 480px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #011E42;
+        }
+        .hero-slide-ally .ally-hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/ally-hero.png');
+            background-size: cover;
+            background-position: 85% 20%;
+            transform: scale(1.05);
+            animation: allySlowZoom 20s ease-in-out infinite alternate;
+        }
+        @keyframes allySlowZoom {
+            from { transform: scale(1.05); }
+            to { transform: scale(1.12); }
+        }
+        .hero-slide-ally .ally-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                105deg,
+                rgba(1, 30, 66, 0.97) 0%,
+                rgba(1, 30, 66, 0.88) 38%,
+                rgba(1, 30, 66, 0.45) 60%,
+                rgba(1, 30, 66, 0.20) 100%
+            );
+        }
+        .hero-slide-ally .hero-slide-inner {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto 0 2rem;
+            padding: 2.5rem 2rem 2.5rem 1.5rem;
+            text-align: left;
+        }
+        .ally-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--color-orange);
+            margin-bottom: 14px;
+        }
+        .ally-eyebrow::before {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 2px;
+            background: var(--color-orange);
+        }
+        .ally-season-badge {
+            display: inline-block;
+            background: rgba(255,95,31,0.12);
+            border: 1px solid rgba(255,95,31,0.35);
+            border-radius: 4px;
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-orange);
+            margin-bottom: 18px;
+        }
+        .ally-headline {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(42px, 6vw, 64px);
+            line-height: 0.92;
+            letter-spacing: 0.02em;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .ally-headline .accent { color: var(--color-orange); }
+        .ally-headline .accent-teal { color: var(--color-teal); }
+        .ally-headline-sub {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2.2vw, 22px);
+            color: rgba(255,255,255,0.72);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        .ally-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-orange), var(--color-teal));
+            border-radius: 2px;
+            margin-bottom: 20px;
+        }
+        .ally-pledge-tiles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .ally-pledge-tile {
+            background: rgba(255, 95, 31, 0.15);
+            border: 1px solid rgba(255, 95, 31, 0.4);
+            border-radius: 10px;
+            padding: 12px 18px;
+            text-align: center;
+        }
+        .ally-pledge-tile .amount {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            color: var(--color-orange);
+            line-height: 1;
+        }
+        .ally-pledge-tile .amount sup { font-size: 16px; }
+        .ally-pledge-tile .label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.8);
+            letter-spacing: 0.05em;
+            margin-top: 4px;
+            line-height: 1.3;
+        }
+        .ally-goal-pill {
+            display: inline-block;
+            background: rgba(1, 185, 179, 0.2);
+            border: 1px solid rgba(1, 185, 179, 0.4);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-teal);
+            margin-bottom: 20px;
+        }
+        .ally-body-copy {
+            font-size: 14px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 520px;
+        }
+        .ally-body-copy em {
+            color: rgba(255,255,255,0.95);
+            font-style: italic;
+        }
+        @media (max-width: 640px) {
+            .hero-slide-ally .hero-slide-inner { margin-left: 1.25rem; padding: 1.5rem 1.25rem 1.5rem 1rem; }
+            .ally-headline { font-size: 38px; }
+            .ally-pledge-tiles { gap: 8px; }
+            .ally-pledge-tile .amount { font-size: 26px; }
         }
 
         /* Logo container with interactive shake */
@@ -187,7 +568,7 @@
         
         /* Body text - two column layout for professional look */
         .body-text {
-            font-size: clamp(0.72rem, 1.44vw, 0.8rem);
+            font-size: clamp(0.85rem, 1.9vw, 0.9375rem);
             color: rgba(255, 255, 255, 0.85);
             font-weight: 300;
             line-height: 1.6;
@@ -1152,6 +1533,50 @@
             }
         }
 
+        /* Total Raised + Story row (1/3 + 2/3) */
+        .totals-story-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 2.5rem auto 3rem;
+            align-items: stretch;
+            position: relative;
+            z-index: 10;
+        }
+        .totals-column {
+            max-width: none;
+            margin: 0;
+        }
+        .story-column {
+            max-width: none;
+            margin: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .story-column-heading {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 1rem;
+        }
+        .story-column .body-text {
+            grid-template-columns: 1fr;
+        }
+        .story-column .body-text p:nth-child(3) {
+            grid-column: 1;
+            text-align: left;
+        }
+        @media (max-width: 768px) {
+            .totals-story-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Story Section - 2 equal columns: Ally image left | Total Raised + Story right */
         .story-section {
             display: grid;
@@ -1343,56 +1768,122 @@
 
     <!-- Main content -->
     <div class="container">
+        <!-- Fixed Header: Logo + Subheading + Buttons (always visible) -->
         <div class="logo-container" id="logoContainer">
             <img src="SO-WHT_1@3x-8.png" alt="Shake On Logo" class="logo" id="logo">
         </div>
-        <p class="subheading">This season, I'm personally pledging $20 for every point I score, every block I make, and every Sirens win — all going to The Michael J. Fox Foundation for Parkinson's research.</p>
-        
-        <!-- Contact Section -->
+        <p class="subheading">This season, I'm personally pledging $20 for every point I score, every block I make, and every Sirens win — all going to The Michael J. Fox Foundation for Parkinson's research. ~ Ally Simpson</p>
         <div class="contact-section">
-            <button type="button" class="contact-btn" onclick="openPledgeModal()">Match my pledge for this Season</button>
+            <button type="button" class="contact-btn" onclick="openPledgeModal('ally')">Match Ally's Pledge</button>
+            <button type="button" class="contact-btn" onclick="openPledgeModal('gwyn')">Match Gwyn's Pledge</button>
             <a href="https://give.michaeljfox.org/fundraiser/6816216" target="_blank" rel="noopener noreferrer" class="donation-btn">Make a one-time donation</a>
             <a href="https://www.thepwhl.com/en/teams/new-york-sirens" target="_blank" rel="noopener noreferrer" class="track-sirens-link">Track the New York Sirens this Season!</a>
         </div>
         
-        <!-- Story Section: Ally image left | Total Raised + Story right (equal-height columns) -->
-        <div class="story-section">
-            <div class="story-image-column">
-                <img src="ally-simpson-spotlight.png" alt="Ally Simpson #20 of the New York Sirens acknowledging the crowd at a PWHL game" class="spotlight-image">
-                <p class="spotlight-caption">Ally Simpson #20 — New York Sirens, PWHL</p>
-            </div>
-            <div class="story-content-column">
-                <!-- Fundraising Totals - Update values in script below -->
-                <div class="fundraising-totals fundraising-totals-inline" id="fundraisingTotals">
-                    <div class="fundraising-totals-label">Total Raised</div>
-                    <div class="fundraising-total-box">
-                        <span class="fundraising-total-amount" id="fundraisingTotalAmount">$12,090</span>
-                        <div class="fundraising-goal">Goal: $20K</div>
-                        <div class="fundraising-percent" id="fundraisingPercent">60.5% to goal</div>
-                    </div>
-                    <div class="fundraising-breakdown">
-                        <div class="fundraising-breakdown-item">
-                            <span class="fundraising-breakdown-label">Pledge Matches</span>
-                            <span class="fundraising-breakdown-amount" id="fundraisingPledgeMatches">$8,340</span>
+        <!-- Carousel indicators (always visible above rotating section) -->
+        <div class="story-carousel-indicators" id="storyCarouselIndicators">
+            <button type="button" class="story-carousel-indicator active" data-slide="0" aria-label="Show Ally's story"></button>
+            <button type="button" class="story-carousel-indicator" data-slide="1" aria-label="Show Gwyn's pledge"></button>
+        </div>
+        
+        <!-- Rotating Section: Ally's hero ↔ Gwyn's hero -->
+        <div class="story-carousel" id="storyCarousel">
+            <!-- Slide 0: Ally's hero -->
+            <div class="story-carousel-slide hero-slide-ally active" data-slide="0">
+                <div class="ally-hero-bg"></div>
+                <div class="ally-hero-overlay"></div>
+                <div class="hero-slide-inner">
+                    <div class="ally-eyebrow">Founder & Chief Advocate · 2025–2026 PWHL Season</div>
+                    <div class="ally-season-badge">🏒 New York Sirens · Defense · #20</div>
+                    <h2 class="ally-headline">
+                        Ally Simpson's<br>
+                        <span class="accent">$20</span> <span class="accent-teal">Pledge</span>
+                    </h2>
+                    <p class="ally-headline-sub">Every point. Every block. Every win.</p>
+                    <div class="ally-divider"></div>
+                    <div class="ally-pledge-tiles">
+                        <div class="ally-pledge-tile">
+                            <div class="amount"><sup>$</sup>20</div>
+                            <div class="label">Per Point<br>Scored</div>
                         </div>
-                        <div class="fundraising-breakdown-item">
-                            <span class="fundraising-breakdown-label">One-Time Donations</span>
-                            <span class="fundraising-breakdown-amount" id="fundraisingOneTime">$3,750</span>
+                        <div class="ally-pledge-tile">
+                            <div class="amount"><sup>$</sup>20</div>
+                            <div class="label">Per Block<br>Made</div>
+                        </div>
+                        <div class="ally-pledge-tile">
+                            <div class="amount"><sup>$</sup>20</div>
+                            <div class="label">Per Sirens<br>Win</div>
                         </div>
                     </div>
-                    <a href="https://www.thepwhl.com/en/teams/new-york-sirens/schedule-25-26" target="_blank" rel="noopener noreferrer" class="fundraising-games-link"><span class="games-number">12</span>&nbsp;Regular Season Games remaining</a>
-                    <a href="https://www.thepwhl.com/en/stats/game-center/279" target="_blank" rel="noopener noreferrer" class="next-game-link">Next Up: Sunday, March 8, 2026 New York Sirens vs Ottawa Charge 12 pm EDT</a>
-                </div>
-                <div class="body-text-container">
-                    <div class="body-text">
-                        <p>Ten years ago, my dad James was diagnosed with Parkinson's disease. If you know someone with Parkinson's, you know how it changes everything — not just for them, but for the whole family. My dad has always been my biggest supporter. He's the reason I fell in love with hockey, the reason I kept pushing through every challenge to get here. Since his diagnosis, he's adopted a phrase that's become our family mantra: Shake On — a reminder to keep moving forward, no matter what.</p>
-                        
-                        <p>This season, I wanted to find a way to use my platform as a professional hockey player for something bigger than the game. So I'm launching Shake On. I play defense for the New York Sirens in the PWHL, and I wear number 20. This season, I'm personally pledging $20 for every point I score, every block I make, and every Sirens win — all going to The Michael J. Fox Foundation for Parkinson's research. My goal is to raise $20,000 — 20 for #20.</p>
-                        
-                        <p>More than 6 million people worldwide live with Parkinson's, and there's still no cure. But research is making progress, and every dollar helps.You can join me by pledging alongside me this season, or by making a one-time donation right here. 100% of what you give goes directly to MJFF's research efforts. Let's Shake On together.</p>
-                    </div>
+                    <div class="ally-goal-pill">🎯 Goal: $20,000 — 20 for #20</div>
+                    <p class="ally-body-copy">
+                        I play defense for the New York Sirens in the PWHL, and I wear number 20. This season, I'm personally pledging $20 for every point I score, every block I make, and every Sirens win — <em>all going to The Michael J. Fox Foundation for Parkinson's research.</em> My goal is to raise $20,000 — 20 for #20. Join me. Every dollar counts. Let's Shake On together.
+                    </p>
                 </div>
             </div>
+            <!-- Slide 1: Gwyn's hero -->
+            <div class="story-carousel-slide hero-slide-gwyn" data-slide="1">
+                <div class="gwyn-hero-bg"></div>
+                <div class="gwyn-hero-overlay"></div>
+                <div class="hero-slide-inner">
+                    <div class="gwyn-eyebrow">Special Collaboration · March 8, 2026</div>
+                    <div class="gwyn-game-badge">🏒 NY Sirens vs Ottawa Charge · 12 PM EDT</div>
+                    <h2 class="gwyn-headline">
+                        Gwyn Phillips'<br>
+                        <span class="accent">$3</span> Per Save
+                    </h2>
+                    <p class="gwyn-headline-sub">A friend, a rival, and a really good cause.</p>
+                    <div class="gwyn-divider"></div>
+                    <div class="gwyn-pledge-card">
+                        <div class="gwyn-pledge-number"><span>$</span>3</div>
+                        <div class="gwyn-pledge-detail">
+                            <strong>Gwyneth Phillips · #33 · Ottawa Charge</strong>
+                            <p>Every save Gwyn makes today goes straight to The Michael J. Fox Foundation for Parkinson's research.</p>
+                        </div>
+                    </div>
+                    <p class="gwyn-body-copy">
+                        My good friend Gwyneth has agreed to donate <em>$3 for every save she makes</em> today — which means I have absolutely no choice but to shoot the puck as many times as humanly possible. Sorry, Gwyn. It's for a great cause.
+                        <br><br>
+                        Every dollar goes directly to research. Want to match her pledge? Every dollar counts. Let's Shake On together.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Raised + Story (below carousel, same row: 1/3 + 2/3) -->
+        <div class="totals-story-row">
+        <div class="fundraising-totals totals-column" id="fundraisingTotals">
+            <div class="fundraising-totals-label">Total Raised</div>
+            <div class="fundraising-total-box">
+                <span class="fundraising-total-amount" id="fundraisingTotalAmount">$12,090</span>
+                <div class="fundraising-goal">Goal: $20K</div>
+                <div class="fundraising-percent" id="fundraisingPercent">60.5% to goal</div>
+            </div>
+            <div class="fundraising-breakdown">
+                <div class="fundraising-breakdown-item">
+                    <span class="fundraising-breakdown-label">Pledge Matches</span>
+                    <span class="fundraising-breakdown-amount" id="fundraisingPledgeMatches">$8,340</span>
+                </div>
+                <div class="fundraising-breakdown-item">
+                    <span class="fundraising-breakdown-label">One-Time Donations</span>
+                    <span class="fundraising-breakdown-amount" id="fundraisingOneTime">$3,750</span>
+                </div>
+            </div>
+            <a href="https://www.thepwhl.com/en/teams/new-york-sirens/schedule-25-26" target="_blank" rel="noopener noreferrer" class="fundraising-games-link"><span class="games-number">12</span>&nbsp;Regular Season Games remaining</a>
+            <a href="https://www.thepwhl.com/en/stats/game-center/279" target="_blank" rel="noopener noreferrer" class="next-game-link">Next Up: Sunday, March 8, 2026 New York Sirens vs Ottawa Charge 12 pm EDT</a>
+        </div>
+
+        <!-- Story (right column, 2/3) -->
+        <div class="body-text-container story-column">
+            <h3 class="story-column-heading">About Shake On</h3>
+            <div class="body-text">
+                <p>Ten years ago, my dad James was diagnosed with Parkinson's disease. If you know someone with Parkinson's, you know how it changes everything — not just for them, but for the whole family. My dad has always been my biggest supporter. He's the reason I fell in love with hockey, the reason I kept pushing through every challenge to get here. Since his diagnosis, he's adopted a phrase that's become our family mantra: Shake On — a reminder to keep moving forward, no matter what.</p>
+                
+                <p>This season, I wanted to find a way to use my platform as a professional hockey player for something bigger than the game. So I'm launching Shake On. I play defense for the New York Sirens in the PWHL, and I wear number 20. This season, I'm personally pledging $20 for every point I score, every block I make, and every Sirens win — all going to The Michael J. Fox Foundation for Parkinson's research. My goal is to raise $20,000 — 20 for #20.</p>
+                
+                <p>More than 6 million people worldwide live with Parkinson's, and there's still no cure. But research is making progress, and every dollar helps. You can join me by pledging alongside me this season, or by making a one-time donation right here. 100% of what you give goes directly to MJFF's research efforts. Let's Shake On together.<br>~ Ally Simpson</p>
+            </div>
+        </div>
         </div>
 
         <!-- Dedication Messages Carousel -->
@@ -1544,6 +2035,58 @@
     </div>
 
     <script>
+        // ========== STORY CAROUSEL - Rotating Ally hero / Gwyn hero ==========
+        (function() {
+            var STORY_INTERVAL_MS = 7000;
+            var carousel = document.getElementById('storyCarousel');
+            var indicatorsEl = document.getElementById('storyCarouselIndicators');
+            if (!carousel) return;
+            var slides = carousel.querySelectorAll('.story-carousel-slide');
+            var indicators = indicatorsEl ? indicatorsEl.querySelectorAll('.story-carousel-indicator') : [];
+            var currentIndex = 0;
+            var intervalId = null;
+
+            function goToSlide(index) {
+                if (index < 0 || index >= slides.length) return;
+                currentIndex = index;
+                for (var i = 0; i < slides.length; i++) {
+                    if (i === index) {
+                        slides[i].classList.add('active');
+                    } else {
+                        slides[i].classList.remove('active');
+                    }
+                }
+                for (var j = 0; j < indicators.length; j++) {
+                    if (j === index) {
+                        indicators[j].classList.add('active');
+                    } else {
+                        indicators[j].classList.remove('active');
+                    }
+                }
+            }
+
+            function nextSlide() {
+                goToSlide((currentIndex + 1) % slides.length);
+            }
+
+            function startInterval() {
+                if (intervalId) clearInterval(intervalId);
+                intervalId = setInterval(nextSlide, STORY_INTERVAL_MS);
+            }
+
+            for (var k = 0; k < indicators.length; k++) {
+                (function(idx) {
+                    indicators[idx].addEventListener('click', function() {
+                        goToSlide(idx);
+                        startInterval();
+                    });
+                })(k);
+            }
+
+            goToSlide(0);
+            startInterval();
+        })();
+
         // ========== FUNDRAISING TOTALS - Update these values to refresh the display ==========
         const FUNDRAISING_TOTALS = {
             totalRaised: '$12,090',
@@ -1689,7 +2232,7 @@
             
             <!-- Form Container -->
             <div id="formContainer" class="form-container">
-                <h2 class="modal-title">Match My Pledge</h2>
+                <h2 class="modal-title" id="pledgeModalTitle">Match Ally's Pledge</h2>
                 <form id="pledgeForm" onsubmit="submitPledgeForm(event)">
                 <div class="form-group">
                     <label for="name">Name *</label>
@@ -1703,7 +2246,7 @@
                 
                 <div class="form-group">
                     <label for="pledgeAmount">Pledge Amount *</label>
-                    <input type="text" id="pledgeAmount" name="pledgeAmount" required value="$20 for every point I score, every block I make, and every Sirens win" placeholder="Enter your pledge amount">
+                    <input type="text" id="pledgeAmount" name="pledgeAmount" required value="$20 for every point &amp; block Ally makes, and every Sirens win" placeholder="Enter your pledge amount">
                 </div>
                 
                 <div class="form-group">
@@ -1742,7 +2285,7 @@
         // Google Apps Script Web App URL
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyRYYyOg_qCEzuCAHDip1Fc1ZUQii9xIs9Z21hsQW0y7Loryo92QNYivzpembr5o1y1/exec';
         
-        function openPledgeModal() {
+        function openPledgeModal(pledgeType) {
             const modal = document.getElementById('pledgeModal');
             if (!modal) {
                 console.error('Modal not found!');
@@ -1750,6 +2293,17 @@
             }
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            // Pre-fill form based on pledge type
+            resetForm();
+            const pledgeAmountEl = document.getElementById('pledgeAmount');
+            const modalTitleEl = document.getElementById('pledgeModalTitle');
+            if (pledgeType === 'gwyn') {
+                pledgeAmountEl.value = '$3 for every save Gwyn makes';
+                if (modalTitleEl) modalTitleEl.textContent = "Match Gwyn's Pledge";
+            } else {
+                pledgeAmountEl.value = '$20 for every point & block Ally makes, and every Sirens win';
+                if (modalTitleEl) modalTitleEl.textContent = "Match Ally's Pledge";
+            }
         }
         
         function closePledgeModal() {
@@ -1767,8 +2321,11 @@
             
             // Reset form
             form.reset();
-            // Reset pledge amount to default value
-            document.getElementById('pledgeAmount').value = '$20 for every point I score, every block I make, and every Sirens win';
+            // Reset pledge amount and title to Ally's default
+            const pledgeAmountEl = document.getElementById('pledgeAmount');
+            const modalTitleEl = document.getElementById('pledgeModalTitle');
+            pledgeAmountEl.value = '$20 for every point & block Ally makes, and every Sirens win';
+            if (modalTitleEl) modalTitleEl.textContent = "Match Ally's Pledge";
             
             // Reset message
             formMessage.className = 'form-message';
@@ -1851,7 +2408,7 @@
                 
                 // Reset form data (but keep it hidden)
                 form.reset();
-                document.getElementById('pledgeAmount').value = '$20 for every point I score, every block I make, and every Sirens win';
+                document.getElementById('pledgeAmount').value = '$20 for every point & block Ally makes, and every Sirens win';
                 grecaptcha.reset();
                 
                 // Re-enable submit button (though form is hidden)
