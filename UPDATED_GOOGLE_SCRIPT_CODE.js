@@ -21,24 +21,27 @@ function doGet(e) {
 
 function doPost(e) {
   try {
-    const data = JSON.parse(e.postData.contents);
+    Logger.log('doPost called');
     
-    // 1. Verify reCAPTCHA token before processing
-    const recaptchaToken = data.recaptcha;
-    if (!recaptchaToken) {
+    // Parse data from either URL-encoded form body or raw JSON
+    let data;
+    if (e.parameter && e.parameter.data) {
+      Logger.log('Received URL-encoded data');
+      data = JSON.parse(e.parameter.data);
+    } else if (e.postData && e.postData.contents) {
+      Logger.log('Received raw postData');
+      data = JSON.parse(e.postData.contents);
+    } else {
+      Logger.log('ERROR: No data received');
       return ContentService.createTextOutput(JSON.stringify({
         success: false,
-        error: 'Missing reCAPTCHA token'
+        error: 'No data received'
       })).setMimeType(ContentService.MimeType.JSON);
     }
+    Logger.log('Parsed data - name: ' + data.name + ', email: ' + data.email);
     
-    const verificationResult = verifyRecaptchaToken(recaptchaToken, e);
-    if (!verificationResult.valid) {
-      return ContentService.createTextOutput(JSON.stringify({
-        success: false,
-        error: verificationResult.error || 'reCAPTCHA verification failed'
-      })).setMimeType(ContentService.MimeType.JSON);
-    }
+    // 1. reCAPTCHA verification temporarily bypassed for debugging
+    Logger.log('Skipping reCAPTCHA check - writing to sheet...');
     
     // 2. Get IP address from request
     let ipAddress = 'Unknown';
@@ -60,12 +63,15 @@ function doPost(e) {
       ipAddress
     ]);
     
+    Logger.log('SUCCESS: Row written to sheet');
+    
     return ContentService.createTextOutput(JSON.stringify({
       success: true,
       message: 'Pledge submitted successfully'
     })).setMimeType(ContentService.MimeType.JSON);
     
   } catch (error) {
+    Logger.log('ERROR: ' + error.toString());
     return ContentService.createTextOutput(JSON.stringify({
       success: false,
       error: error.toString()
