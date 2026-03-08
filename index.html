@@ -2090,6 +2090,28 @@
 
             goToSlide(0);
             startInterval();
+
+            var swipeStartX = 0;
+            var swipeStartY = 0;
+            carousel.addEventListener('touchstart', function(e) {
+                swipeStartX = e.touches[0].clientX;
+                swipeStartY = e.touches[0].clientY;
+            }, { passive: true });
+            carousel.addEventListener('touchend', function(e) {
+                if (!swipeStartX) return;
+                var deltaX = e.changedTouches[0].clientX - swipeStartX;
+                var deltaY = e.changedTouches[0].clientY - swipeStartY;
+                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                    if (deltaX < 0) {
+                        goToSlide((currentIndex + 1) % slides.length);
+                    } else {
+                        goToSlide((currentIndex - 1 + slides.length) % slides.length);
+                    }
+                    startInterval();
+                }
+                swipeStartX = 0;
+                swipeStartY = 0;
+            }, { passive: true });
         })();
 
         // ========== FUNDRAISING TOTALS - Update these values to refresh the display ==========
