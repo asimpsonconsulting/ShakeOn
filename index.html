@@ -344,7 +344,7 @@
             inset: 0;
             background-image: url('assets/community-heroes-hero.png');
             background-size: cover;
-            background-position: center 30%;
+            background-position: center 15%;
             transform: scale(1.05);
             animation: communitySlowZoom 20s ease-in-out infinite alternate;
         }
@@ -2046,9 +2046,9 @@
         <div class="fundraising-totals totals-column" id="fundraisingTotals">
             <div class="fundraising-totals-label">Total Raised</div>
             <div class="fundraising-total-box">
-                <span class="fundraising-total-amount" id="fundraisingTotalAmount">$17,482</span>
+                <span class="fundraising-total-amount" id="fundraisingTotalAmount">$17,588</span>
                 <div class="fundraising-goal">Goal: $20K</div>
-                <div class="fundraising-percent" id="fundraisingPercent">87.4% to goal</div>
+                <div class="fundraising-percent" id="fundraisingPercent">87.9% to goal</div>
             </div>
             <div class="fundraising-breakdown">
                 <div class="fundraising-breakdown-item">
@@ -2057,7 +2057,7 @@
                 </div>
                 <div class="fundraising-breakdown-item">
                     <span class="fundraising-breakdown-label">One-Time Donations</span>
-                    <span class="fundraising-breakdown-amount" id="fundraisingOneTime">$4,463</span>
+                    <span class="fundraising-breakdown-amount" id="fundraisingOneTime">$4,569</span>
                 </div>
             </div>
             <a href="https://www.thepwhl.com/en/teams/new-york-sirens/schedule-25-26" target="_blank" rel="noopener noreferrer" class="fundraising-games-link"><span class="games-number">9</span>&nbsp;Regular Season Games remaining</a>
@@ -2229,7 +2229,7 @@
     <script>
         // ========== STORY CAROUSEL - Rotating Ally hero / Gwyn hero ==========
         (function() {
-            var STORY_INTERVAL_MS = 7000;
+            var STORY_INTERVAL_MS = 14000;
             var carousel = document.getElementById('storyCarousel');
             var indicatorsEl = document.getElementById('storyCarouselIndicators');
             if (!carousel) return;
@@ -2303,10 +2303,10 @@
 
         // ========== FUNDRAISING TOTALS - Update these values to refresh the display ==========
         const FUNDRAISING_TOTALS = {
-            totalRaised: '$17,482',
+            totalRaised: '$17,588',
             pledgeMatches: '$13,019',
-            oneTimeDonations: '$4,463',
-            percentToGoal: '87.4%'
+            oneTimeDonations: '$4,569',
+            percentToGoal: '87.9%'
         };
         // Populate fundraising totals on load
         document.addEventListener('DOMContentLoaded', function() {
