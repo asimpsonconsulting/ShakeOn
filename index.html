@@ -331,6 +331,140 @@
             .gwyn-headline { font-size: 38px; }
         }
 
+        /* ── Community Heroes Night Slide (with background image) ── */
+        .hero-slide-community {
+            height: 100%;
+            min-height: 480px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #011E42;
+        }
+        .hero-slide-community .community-hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/community-heroes-hero.png');
+            background-size: cover;
+            background-position: center 30%;
+            transform: scale(1.05);
+            animation: communitySlowZoom 20s ease-in-out infinite alternate;
+        }
+        @keyframes communitySlowZoom {
+            from { transform: scale(1.05); }
+            to { transform: scale(1.12); }
+        }
+        .hero-slide-community .community-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                105deg,
+                rgba(1, 30, 66, 0.97) 0%,
+                rgba(1, 30, 66, 0.90) 40%,
+                rgba(1, 30, 66, 0.50) 65%,
+                rgba(1, 30, 66, 0.25) 100%
+            );
+        }
+        .hero-slide-community .hero-slide-inner {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto 0 2rem;
+            padding: 2.5rem 3rem 2.5rem 1.5rem;
+            text-align: left;
+        }
+        .community-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--color-orange);
+            margin-bottom: 14px;
+        }
+        .community-eyebrow::before {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 2px;
+            background: var(--color-orange);
+        }
+        .community-game-badge {
+            display: inline-block;
+            background: rgba(255,95,31,0.12);
+            border: 1px solid rgba(255,95,31,0.35);
+            border-radius: 4px;
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-orange);
+            margin-bottom: 18px;
+        }
+        .community-headline {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(36px, 5vw, 56px);
+            line-height: 0.95;
+            letter-spacing: 0.02em;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .community-headline-sub {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2.2vw, 22px);
+            color: rgba(255,255,255,0.72);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        .community-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-orange), var(--color-teal));
+            border-radius: 2px;
+            margin-bottom: 20px;
+        }
+        .community-info-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(255, 95, 31, 0.12);
+            border: 1px solid rgba(255, 95, 31, 0.35);
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+        }
+        .community-info-card strong {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .community-info-card p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.5;
+            max-width: 380px;
+        }
+        .community-body-copy {
+            font-size: 14px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 520px;
+            margin-bottom: 12px;
+        }
+        .community-body-copy em {
+            color: rgba(255,255,255,0.95);
+            font-style: italic;
+        }
+        @media (max-width: 640px) {
+            .hero-slide-community .hero-slide-inner { margin-left: 1.25rem; padding: 1.5rem 2rem 2.5rem 1rem; }
+            .community-headline { font-size: 32px; }
+        }
+
         /* ── Ally Hero Slide (with background image) ── */
         .hero-slide-ally {
             height: 100%;
@@ -1814,14 +1948,39 @@
         
         <!-- Carousel indicators (always visible above rotating section) -->
         <div class="story-carousel-indicators" id="storyCarouselIndicators">
-            <button type="button" class="story-carousel-indicator active" data-slide="0" aria-label="Show Ally's story"></button>
-            <button type="button" class="story-carousel-indicator" data-slide="1" aria-label="Show Gwyn's pledge"></button>
+            <button type="button" class="story-carousel-indicator active" data-slide="0" aria-label="Show Community Heroes Night"></button>
+            <button type="button" class="story-carousel-indicator" data-slide="1" aria-label="Show Ally's pledge"></button>
+            <button type="button" class="story-carousel-indicator" data-slide="2" aria-label="Show Gwyn's pledge"></button>
         </div>
         
         <!-- Rotating Section: Ally's hero ↔ Gwyn's hero -->
         <div class="story-carousel" id="storyCarousel">
-            <!-- Slide 0: Ally's hero -->
-            <div class="story-carousel-slide hero-slide-ally active" data-slide="0">
+            <!-- Slide 0: Community Heroes Night -->
+            <div class="story-carousel-slide hero-slide-community active" data-slide="0">
+                <div class="community-hero-bg"></div>
+                <div class="community-hero-overlay"></div>
+                <div class="hero-slide-inner">
+                    <div class="community-eyebrow">Special Collaboration · April 1, 2026</div>
+                    <div class="community-game-badge">🏒 NY Sirens vs Minnesota Frost · 7 PM EDT</div>
+                    <h2 class="community-headline">Community Heroes Night<br>at The Rock</h2>
+                    <p class="community-headline-sub">Come out. Show up. Shake On.</p>
+                    <div class="community-divider"></div>
+                    <div class="community-info-card">
+                        <div>
+                            <strong>James Simpson · Honorary Founding Member · Shake On</strong>
+                            <p>A portion of ticket proceeds from tonight's regular season home game benefit The Michael J. Fox Foundation for Parkinson's research.</p>
+                        </div>
+                    </div>
+                    <p class="community-body-copy">
+                        On April 1st, my dad — the reason Shake On exists — will drop the puck at Prudential Center. More than ten years after his Parkinson's diagnosis, he's joining us at center ice. I don't have the words for what that means to me.
+                    </p>
+                    <p class="community-body-copy">
+                        Tonight is one of the last regular season home games of the season, and a portion of every ticket sold is going directly toward Parkinson's research. Come out, cheer loud, and let's Shake On together.
+                    </p>
+                </div>
+            </div>
+            <!-- Slide 1: Ally's hero -->
+            <div class="story-carousel-slide hero-slide-ally" data-slide="1">
                 <div class="ally-hero-bg"></div>
                 <div class="ally-hero-overlay"></div>
                 <div class="hero-slide-inner">
@@ -1854,7 +2013,7 @@
                 </div>
             </div>
             <!-- Slide 1: Gwyn's hero -->
-            <div class="story-carousel-slide hero-slide-gwyn" data-slide="1">
+            <div class="story-carousel-slide hero-slide-gwyn" data-slide="2">
                 <div class="gwyn-hero-bg"></div>
                 <div class="gwyn-hero-overlay"></div>
                 <div class="hero-slide-inner">
