@@ -24,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     
     <!-- reCAPTCHA -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- reCAPTCHA removed -->
     
     <style>
         :root {
@@ -2503,9 +2503,6 @@
                     <textarea id="dedication" name="dedication" rows="8" placeholder="Share a message or dedication..."></textarea>
                 </div>
                 
-                <div class="recaptcha-container">
-                    <div class="g-recaptcha" data-sitekey="6Ld_SVUsAAAAAKIQpaytI8PJ76qAqmPHHakAgxPy"></div>
-                </div>
                 
                 <div id="formMessage" class="form-message"></div>
                 
@@ -2581,9 +2578,6 @@
             formMessage.textContent = '';
             
             // Reset reCAPTCHA
-            if (typeof grecaptcha !== 'undefined') {
-                grecaptcha.reset();
-            }
             
             // Show form, hide thank you screen
             formContainer.classList.remove('hidden');
@@ -2611,13 +2605,6 @@
             const formMessage = document.getElementById('formMessage');
             const form = document.getElementById('pledgeForm');
             
-            // Validate reCAPTCHA
-            const recaptchaResponse = grecaptcha.getResponse();
-            if (!recaptchaResponse) {
-                formMessage.className = 'form-message error';
-                formMessage.textContent = 'Please complete the reCAPTCHA verification.';
-                return;
-            }
             
             // Disable submit button
             submitBtn.disabled = true;
@@ -2632,7 +2619,7 @@
                 email: formData.get('email'),
                 pledgeAmount: formData.get('pledgeAmount') || '',
                 dedication: formData.get('dedication') || '',
-                recaptcha: recaptchaResponse,
+                recaptcha: '',
                 timestamp: new Date().toISOString()
             };
             
@@ -2657,7 +2644,6 @@
                 // Reset form data (but keep it hidden)
                 form.reset();
                 document.getElementById('pledgeAmount').value = '$20 for every point & block Ally makes, and every Sirens win';
-                grecaptcha.reset();
                 
                 // Re-enable submit button (though form is hidden)
                 submitBtn.disabled = false;
