@@ -331,6 +331,144 @@
             .gwyn-headline { font-size: 38px; }
         }
 
+        /* ── NHL Announcement Slide (portrait image, right-aligned) ── */
+        .hero-slide-nhl {
+            height: 100%;
+            min-height: 480px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #011E42;
+        }
+        .hero-slide-nhl .nhl-hero-bg {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 55%;
+            background-image: url('assets/nhl-announcement-hero.png');
+            background-size: cover;
+            background-position: center 20%;
+        }
+        .hero-slide-nhl .nhl-hero-blur {
+            position: absolute;
+            right: 35%;
+            top: 0;
+            bottom: 0;
+            width: 25%;
+            background-image: url('assets/nhl-announcement-hero.png');
+            background-size: cover;
+            background-position: left 20%;
+            filter: blur(20px);
+        }
+        .hero-slide-nhl .nhl-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(1, 30, 66, 1) 0%,
+                rgba(1, 30, 66, 0.98) 35%,
+                rgba(1, 30, 66, 0.85) 50%,
+                rgba(1, 30, 66, 0.3) 70%,
+                rgba(1, 30, 66, 0.1) 100%
+            );
+        }
+        .hero-slide-nhl .hero-slide-inner {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 0 2rem;
+            padding: 2.5rem 2rem 2.5rem 1.5rem;
+            text-align: left;
+        }
+        .nhl-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--color-orange);
+            margin-bottom: 14px;
+        }
+        .nhl-eyebrow::before {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 2px;
+            background: var(--color-orange);
+        }
+        .nhl-headline {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(36px, 5vw, 56px);
+            line-height: 0.95;
+            letter-spacing: 0.02em;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .nhl-headline .accent { color: var(--color-orange); }
+        .nhl-headline-sub {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2.2vw, 22px);
+            color: rgba(255,255,255,0.72);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        .nhl-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-orange), var(--color-teal));
+            border-radius: 2px;
+            margin-bottom: 20px;
+        }
+        .nhl-quote {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid var(--color-orange);
+            border-radius: 0 8px 8px 0;
+            padding: 14px 18px;
+            margin-bottom: 16px;
+            max-width: 520px;
+        }
+        .nhl-quote p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+        }
+        .nhl-quote .quote-source {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-orange);
+            margin-top: 8px;
+            font-style: normal;
+        }
+        .nhl-quote.ally-reply {
+            border-left-color: var(--color-teal);
+        }
+        .nhl-quote.ally-reply .quote-source {
+            color: var(--color-teal);
+        }
+        @media (max-width: 640px) {
+            .hero-slide-nhl .hero-slide-inner { margin-left: 1.25rem; padding: 1.5rem 2rem 2.5rem 1rem; }
+            .nhl-headline { font-size: 32px; }
+            .hero-slide-nhl .nhl-hero-bg { width: 45%; }
+            .hero-slide-nhl .nhl-hero-blur { right: 30%; }
+            .hero-slide-nhl .nhl-hero-overlay {
+                background: linear-gradient(
+                    90deg,
+                    rgba(1, 30, 66, 1) 0%,
+                    rgba(1, 30, 66, 0.98) 40%,
+                    rgba(1, 30, 66, 0.85) 55%,
+                    rgba(1, 30, 66, 0.4) 75%,
+                    rgba(1, 30, 66, 0.15) 100%
+                );
+            }
+        }
+
         /* ── Community Heroes Night Slide (with background image) ── */
         .hero-slide-community {
             height: 100%;
@@ -1665,7 +1803,7 @@
         
         .fundraising-breakdown {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 1.25rem;
         }
         
@@ -1951,15 +2089,36 @@
         
         <!-- Carousel indicators (always visible above rotating section) -->
         <div class="story-carousel-indicators" id="storyCarouselIndicators">
-            <button type="button" class="story-carousel-indicator active" data-slide="0" aria-label="Show Community Heroes Night"></button>
-            <button type="button" class="story-carousel-indicator" data-slide="1" aria-label="Show Ally's pledge"></button>
-            <button type="button" class="story-carousel-indicator" data-slide="2" aria-label="Show Gwyn's pledge"></button>
+            <button type="button" class="story-carousel-indicator active" data-slide="0" aria-label="Show NHL Announcement"></button>
+            <button type="button" class="story-carousel-indicator" data-slide="1" aria-label="Show Community Heroes Night"></button>
+            <button type="button" class="story-carousel-indicator" data-slide="2" aria-label="Show Ally's pledge"></button>
+            <button type="button" class="story-carousel-indicator" data-slide="3" aria-label="Show Gwyn's pledge"></button>
         </div>
         
         <!-- Rotating Section: Ally's hero ↔ Gwyn's hero -->
         <div class="story-carousel" id="storyCarousel">
-            <!-- Slide 0: Community Heroes Night -->
-            <div class="story-carousel-slide hero-slide-community active" data-slide="0">
+            <!-- Slide 0: NHL Announcement -->
+            <div class="story-carousel-slide hero-slide-nhl active" data-slide="0">
+                <div class="nhl-hero-blur"></div>
+                <div class="nhl-hero-bg"></div>
+                <div class="nhl-hero-overlay"></div>
+                <div class="hero-slide-inner">
+                    <div class="nhl-eyebrow">Major Announcement · April 2026</div>
+                    <h2 class="nhl-headline">The <span class="accent">NHL</span> Backs<br>Shake On</h2>
+                    <p class="nhl-headline-sub">$10,000 contribution to Parkinson's research.</p>
+                    <div class="nhl-divider"></div>
+                    <div class="nhl-quote">
+                        <p>"The NHL is proud to contribute $10,000 to Shake On, supporting the Michael J. Fox Foundation — an official partner of the NHL Foundation. We're proud to support Ally Simpson's Shake On efforts to raise awareness and advance research for Parkinson's."</p>
+                        <p class="quote-source">— NHL</p>
+                    </div>
+                    <div class="nhl-quote ally-reply">
+                        <p>"So grateful for your support!! I can't thank the NHL enough."</p>
+                        <p class="quote-source">— Ally Simpson</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 1: Community Heroes Night -->
+            <div class="story-carousel-slide hero-slide-community" data-slide="1">
                 <div class="community-hero-bg"></div>
                 <div class="community-hero-overlay"></div>
                 <div class="hero-slide-inner">
@@ -1982,8 +2141,8 @@
                     </p>
                 </div>
             </div>
-            <!-- Slide 1: Ally's hero -->
-            <div class="story-carousel-slide hero-slide-ally" data-slide="1">
+            <!-- Slide 2: Ally's hero -->
+            <div class="story-carousel-slide hero-slide-ally" data-slide="2">
                 <div class="ally-hero-bg"></div>
                 <div class="ally-hero-overlay"></div>
                 <div class="hero-slide-inner">
@@ -2016,7 +2175,7 @@
                 </div>
             </div>
             <!-- Slide 1: Gwyn's hero -->
-            <div class="story-carousel-slide hero-slide-gwyn" data-slide="2">
+            <div class="story-carousel-slide hero-slide-gwyn" data-slide="3">
                 <div class="gwyn-hero-bg"></div>
                 <div class="gwyn-hero-overlay"></div>
                 <div class="hero-slide-inner">
@@ -2049,22 +2208,26 @@
         <div class="fundraising-totals totals-column" id="fundraisingTotals">
             <div class="fundraising-totals-label">Total Raised</div>
             <div class="fundraising-total-box">
-                <span class="fundraising-total-amount" id="fundraisingTotalAmount">$26,318</span>
+                <span class="fundraising-total-amount" id="fundraisingTotalAmount">$39,678</span>
                 <div class="fundraising-goal">Goal: $20K</div>
-                <div class="fundraising-percent" id="fundraisingPercent">131.6% to goal</div>
+                <div class="fundraising-percent" id="fundraisingPercent">198.4% to goal</div>
             </div>
             <div class="fundraising-breakdown">
                 <div class="fundraising-breakdown-item">
                     <span class="fundraising-breakdown-label">Pledge Matches</span>
-                    <span class="fundraising-breakdown-amount" id="fundraisingPledgeMatches">$20,384</span>
+                    <span class="fundraising-breakdown-amount" id="fundraisingPledgeMatches">$23,344</span>
                 </div>
                 <div class="fundraising-breakdown-item">
                     <span class="fundraising-breakdown-label">One-Time Donations</span>
-                    <span class="fundraising-breakdown-amount" id="fundraisingOneTime">$5,934</span>
+                    <span class="fundraising-breakdown-amount" id="fundraisingOneTime">$6,334</span>
+                </div>
+                <div class="fundraising-breakdown-item">
+                    <span class="fundraising-breakdown-label">Special One-Time Donations</span>
+                    <span class="fundraising-breakdown-amount" id="fundraisingSpecial">$10,000</span>
                 </div>
             </div>
-            <a href="https://www.thepwhl.com/en/teams/new-york-sirens/schedule-25-26" target="_blank" rel="noopener noreferrer" class="fundraising-games-link"><span class="games-number">6</span>&nbsp;Regular Season Games remaining</a>
-            <a href="https://www.thepwhl.com/en/stats/game-center/308" target="_blank" rel="noopener noreferrer" class="next-game-link">Next Up: April 4th<br>Madison Square Garden<br>New York Sirens v Seattle Torrent</a>
+            <a href="https://www.thepwhl.com/en/teams/new-york-sirens/schedule-25-26" target="_blank" rel="noopener noreferrer" class="fundraising-games-link"><span class="games-number">5</span>&nbsp;Regular Season Games remaining</a>
+            <a href="https://www.thepwhl.com/en/stats/game-center/312" target="_blank" rel="noopener noreferrer" class="next-game-link">Next Up: Saturday, April 11<br>New York Sirens v Minnesota Frost<br>1:00 PM ET</a>
         </div>
 
         <!-- Story (right column, 2/3) -->
@@ -2306,10 +2469,11 @@
 
         // ========== FUNDRAISING TOTALS - Update these values to refresh the display ==========
         const FUNDRAISING_TOTALS = {
-            totalRaised: '$26,318',
-            pledgeMatches: '$20,384',
-            oneTimeDonations: '$5,934',
-            percentToGoal: '131.6%'
+            totalRaised: '$39,678',
+            pledgeMatches: '$23,344',
+            oneTimeDonations: '$6,334',
+            specialDonations: '$10,000',
+            percentToGoal: '198.4%'
         };
         // Populate fundraising totals on load
         document.addEventListener('DOMContentLoaded', function() {
