@@ -381,6 +381,17 @@
             padding: 2.5rem 2rem 2.5rem 1.5rem;
             text-align: left;
         }
+        .nhl-logo-badge {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+        .nhl-logo-badge img {
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+        }
         .nhl-eyebrow {
             display: inline-flex;
             align-items: center;
@@ -390,7 +401,7 @@
             letter-spacing: 0.18em;
             text-transform: uppercase;
             color: var(--color-orange);
-            margin-bottom: 14px;
+            margin-bottom: 0;
         }
         .nhl-eyebrow::before {
             content: '';
@@ -2103,7 +2114,10 @@
                 <div class="nhl-hero-bg"></div>
                 <div class="nhl-hero-overlay"></div>
                 <div class="hero-slide-inner">
-                    <div class="nhl-eyebrow">Major Announcement · April 2026</div>
+                    <div class="nhl-logo-badge">
+                        <img src="assets/nhl-logo.png" alt="NHL Logo">
+                        <div class="nhl-eyebrow">Major Announcement · April 2026</div>
+                    </div>
                     <h2 class="nhl-headline">The <span class="accent">NHL</span> Backs<br>Shake On</h2>
                     <p class="nhl-headline-sub">$10,000 contribution to Parkinson's research.</p>
                     <div class="nhl-divider"></div>
