@@ -1448,9 +1448,85 @@
         }
         
         /* PWHL Section */
-        .pwhl-section {
+        /* Partner logos row (PWHL + MJFF side by side) */
+        .partner-logos-row {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: stretch;
             margin-top: 4rem;
             animation: fade-in 2s ease-in-out 3s both;
+        }
+        @media (max-width: 768px) {
+            .partner-logos-row {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .pwhl-section {
+            margin-top: 0;
+            flex: 1;
+            max-width: 400px;
+            animation: none;
+        }
+        
+        .mjff-section {
+            flex: 1;
+            max-width: 400px;
+        }
+        .mjff-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+            text-decoration: none;
+            padding: 2rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .mjff-link:hover {
+            background: rgba(255, 95, 31, 0.06);
+            border-color: rgba(255, 95, 31, 0.3);
+            transform: translateY(-3px);
+        }
+        .mjff-logo {
+            width: 100%;
+            max-width: 240px;
+            height: auto;
+        }
+        .mjff-info {
+            text-align: center;
+        }
+        .mjff-org {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 0.03em;
+        }
+        .mjff-text {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 0.35rem;
+        }
+        @media (max-width: 768px) {
+            .mjff-link { max-width: 90%; }
+        }
+        @media (max-width: 480px) {
+            .mjff-logo { max-width: 160px; }
+            .mjff-link { max-width: 320px; padding: 1.25rem; }
+        }
+
+        /* MJFF logo in pledge form */
+        .form-mjff-logo {
+            display: block;
+            width: 180px;
+            height: auto;
+            margin: 0 auto 1.5rem;
+            opacity: 0.9;
         }
         
         .pwhl-link {
@@ -2386,7 +2462,8 @@
             </div>
         </div>
         
-        <!-- PWHL Section -->
+        <!-- Partner Logos Row -->
+        <div class="partner-logos-row">
         <div class="pwhl-section">
             <a href="https://www.thepwhl.com/en/stats/schedule/4/8/all-months/homeaway?league=1" target="_blank" rel="noopener noreferrer" class="pwhl-link">
                 <div class="pwhl-logo">
@@ -2403,6 +2480,15 @@
                     <p class="pwhl-team">New York Sirens</p>
                 </div>
             </a>
+        </div>
+        <div class="mjff-section">
+            <a href="https://www.michaeljfox.org/" target="_blank" rel="noopener noreferrer" class="mjff-link">
+                <img src="assets/mjff-logo.png" alt="The Michael J. Fox Foundation for Parkinson's Research" class="mjff-logo">
+                <div class="mjff-info">
+                    <p class="mjff-text">100% of donations go directly to Parkinson's research</p>
+                </div>
+            </a>
+        </div>
         </div>
     </div>
 
@@ -2659,6 +2745,7 @@
             
             <!-- Form Container -->
             <div id="formContainer" class="form-container">
+                <img src="SO-WHT_1@3x-8.png" alt="Shake On Logo" style="display: block; width: 200px; height: auto; margin: 0 auto 1.5rem;">
                 <h2 class="modal-title" id="pledgeModalTitle">Match Ally's Pledge</h2>
                 <form id="pledgeForm" onsubmit="submitPledgeForm(event)">
                 <div class="form-group">
@@ -2686,6 +2773,7 @@
                 
                 <button type="submit" class="form-submit-btn" id="submitBtn">Submit Pledge</button>
                 </form>
+                <img src="assets/mjff-logo.png" alt="The Michael J. Fox Foundation for Parkinson's Research" class="form-mjff-logo" style="margin-top: 1.5rem;">
             </div>
             
             <!-- Thank You Screen -->
