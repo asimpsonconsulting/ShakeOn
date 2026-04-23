@@ -480,6 +480,214 @@
             }
         }
 
+        /* ── Haley Winn × Shake On — regular-season finale (Fleet photo hero) ── */
+        .hero-slide-haley {
+            height: 100%;
+            min-height: 480px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #011E42;
+        }
+        .hero-slide-haley .haley-hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('assets/haley-winn-collab-hero.png');
+            background-size: cover;
+            /* Strong pan up + right so the skater clears the left text column */
+            background-position: 100% 0%;
+            transform: scale(1.06) translate(6vw, -5vh);
+            transform-origin: 88% 18%;
+            animation: haleySlowZoom 22s ease-in-out infinite alternate;
+        }
+        @keyframes haleySlowZoom {
+            from { transform: scale(1.06) translate(6vw, -5vh); }
+            to { transform: scale(1.11) translate(6vw, -5vh); }
+        }
+        @keyframes haleySlowZoomMobile {
+            from { transform: scale(1.03) translate(0, -0.5vh); }
+            to { transform: scale(1.07) translate(0, -0.5vh); }
+        }
+        .hero-slide-haley .haley-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                105deg,
+                rgba(1, 30, 66, 0.97) 0%,
+                rgba(1, 30, 66, 0.92) 36%,
+                rgba(1, 46, 42, 0.55) 58%,
+                rgba(1, 30, 66, 0.22) 100%
+            );
+        }
+        .hero-slide-haley .hero-slide-inner {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto 0 2rem;
+            padding: 2.5rem 3rem 2.5rem 1.5rem;
+            text-align: left;
+        }
+        .haley-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--color-orange);
+            margin-bottom: 14px;
+        }
+        .haley-eyebrow::before {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 2px;
+            background: var(--color-orange);
+        }
+        .haley-game-badge {
+            display: inline-block;
+            background: rgba(1, 185, 179, 0.12);
+            border: 1px solid rgba(1, 185, 179, 0.4);
+            border-radius: 4px;
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-teal);
+            margin-bottom: 18px;
+        }
+        .haley-headline {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(38px, 5.5vw, 58px);
+            line-height: 0.95;
+            letter-spacing: 0.02em;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .haley-headline .accent { color: var(--color-orange); }
+        .haley-headline .fleet { color: #5ee6c4; }
+        .haley-headline-sub {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(16px, 2.2vw, 22px);
+            color: rgba(255,255,255,0.76);
+            margin-bottom: 20px;
+            line-height: 1.35;
+        }
+        .haley-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #01783E, var(--color-teal));
+            border-radius: 2px;
+            margin-bottom: 20px;
+        }
+        .haley-info-card {
+            display: block;
+            background: rgba(1, 120, 62, 0.14);
+            border: 1px solid rgba(94, 230, 196, 0.35);
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 18px;
+            max-width: 540px;
+        }
+        .haley-info-card strong {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .haley-info-card p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.68);
+            line-height: 1.55;
+        }
+        .haley-pledge-tiles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        .haley-pledge-tile {
+            flex: 1 1 140px;
+            min-width: 132px;
+            max-width: 220px;
+            background: rgba(1, 30, 66, 0.55);
+            border: 1px solid rgba(94, 230, 196, 0.45);
+            border-radius: 12px;
+            padding: 14px 16px;
+            text-align: center;
+        }
+        .haley-pledge-tile .amount {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: #5ee6c4;
+            line-height: 1;
+        }
+        .haley-pledge-tile .amount sup { font-size: 17px; vertical-align: super; }
+        .haley-pledge-tile .label {
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.88);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-top: 8px;
+            line-height: 1.35;
+        }
+        .haley-pledge-tile .label span {
+            display: block;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            text-transform: none;
+            font-size: 12px;
+            color: rgba(255,255,255,0.62);
+            margin-top: 4px;
+        }
+        .haley-body-copy {
+            font-size: 14px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.78);
+            max-width: 520px;
+            margin-bottom: 14px;
+        }
+        .haley-body-copy em {
+            color: rgba(255,255,255,0.95);
+            font-style: italic;
+        }
+        .haley-game-link {
+            display: inline-block;
+            margin-top: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--color-teal);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(1, 185, 179, 0.45);
+            padding-bottom: 2px;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+        .haley-game-link:hover {
+            color: #7ff5e0;
+            border-bottom-color: rgba(127, 245, 224, 0.7);
+        }
+        /* Narrow viewports: portrait "cover" crops differently than desktop — keep skater in frame */
+        @media (max-width: 900px) {
+            .hero-slide-haley .haley-hero-bg {
+                background-position: 56% 12%;
+                transform: scale(1.03) translate(0, -0.5vh);
+                transform-origin: 56% 28%;
+                animation: haleySlowZoomMobile 22s ease-in-out infinite alternate;
+            }
+        }
+        @media (max-width: 640px) {
+            .hero-slide-haley .hero-slide-inner { margin-left: 1.25rem; padding: 1.5rem 2rem 2.5rem 1rem; }
+            .haley-headline { font-size: 34px; }
+            .haley-pledge-tile .amount { font-size: 30px; }
+        }
+
         /* ── Community Heroes Night Slide (with background image) ── */
         .hero-slide-community {
             height: 100%;
@@ -2176,16 +2384,47 @@
         
         <!-- Carousel indicators (always visible above rotating section) -->
         <div class="story-carousel-indicators" id="storyCarouselIndicators">
-            <button type="button" class="story-carousel-indicator active" data-slide="0" aria-label="Show NHL Announcement"></button>
-            <button type="button" class="story-carousel-indicator" data-slide="1" aria-label="Show Community Heroes Night"></button>
-            <button type="button" class="story-carousel-indicator" data-slide="2" aria-label="Show Ally's pledge"></button>
-            <button type="button" class="story-carousel-indicator" data-slide="3" aria-label="Show Gwyn's pledge"></button>
+            <button type="button" class="story-carousel-indicator active" aria-label="Show Haley Winn season finale collaboration"></button>
+            <button type="button" class="story-carousel-indicator" aria-label="Show NHL Announcement"></button>
+            <button type="button" class="story-carousel-indicator" aria-label="Show Community Heroes Night"></button>
+            <button type="button" class="story-carousel-indicator" aria-label="Show Ally's pledge"></button>
+            <button type="button" class="story-carousel-indicator" aria-label="Show Gwyn's pledge"></button>
         </div>
         
-        <!-- Rotating Section: Ally's hero ↔ Gwyn's hero -->
+        <!-- Rotating hero carousel -->
         <div class="story-carousel" id="storyCarousel">
-            <!-- Slide 0: NHL Announcement -->
-            <div class="story-carousel-slide hero-slide-nhl active" data-slide="0">
+            <!-- Slide 0: Haley Winn × Shake On — regular-season finale -->
+            <div class="story-carousel-slide hero-slide-haley active">
+                <div class="haley-hero-bg"></div>
+                <div class="haley-hero-overlay"></div>
+                <div class="hero-slide-inner">
+                    <div class="haley-eyebrow">Special collaboration · Regular-season finale</div>
+                    <div class="haley-game-badge">NY Sirens vs Boston Fleet · Sat Apr 25 · 12 PM ET · Tsongas Center, Lowell</div>
+                    <h2 class="haley-headline"><span class="fleet">Haley Winn</span> × <span class="accent">Shake On</span></h2>
+                    <p class="haley-headline-sub">The New York Sirens' last game of the regular season — with a cross-league pledge for Parkinson's research.</p>
+                    <div class="haley-divider"></div>
+                    <div class="haley-info-card">
+                        <strong>Haley Winn · Boston Fleet</strong>
+                        <p>For this game, Haley is matching Shake On with two pledges tied to the score sheet: every goal scored in the game, and every shot Boston puts on net.</p>
+                    </div>
+                    <div class="haley-pledge-tiles">
+                        <div class="haley-pledge-tile">
+                            <div class="amount"><sup>$</sup>10</div>
+                            <div class="label">Per goal<span>Total goals in the game (both teams)</span></div>
+                        </div>
+                        <div class="haley-pledge-tile">
+                            <div class="amount"><sup>$</sup>3</div>
+                            <div class="label">Per shot on goal<span>Boston Fleet shots on net</span></div>
+                        </div>
+                    </div>
+                    <p class="haley-body-copy">
+                        Rivalry stays on the ice — research is the shared win. Every matched dollar goes to <em>The Michael J. Fox Foundation for Parkinson's research.</em> Tune in, cheer loud, and let's Shake On together.
+                    </p>
+                    <a href="https://www.thepwhl.com/en/stats/game-center/329" target="_blank" rel="noopener noreferrer" class="haley-game-link">Game center · PWHL</a>
+                </div>
+            </div>
+            <!-- Slide 1: NHL Announcement -->
+            <div class="story-carousel-slide hero-slide-nhl">
                 <div class="nhl-hero-blur"></div>
                 <div class="nhl-hero-bg"></div>
                 <div class="nhl-hero-overlay"></div>
@@ -2207,8 +2446,8 @@
                     </div>
                 </div>
             </div>
-            <!-- Slide 1: Community Heroes Night -->
-            <div class="story-carousel-slide hero-slide-community" data-slide="1">
+            <!-- Slide 2: Community Heroes Night -->
+            <div class="story-carousel-slide hero-slide-community">
                 <div class="community-hero-bg"></div>
                 <div class="community-hero-overlay"></div>
                 <div class="hero-slide-inner">
@@ -2231,8 +2470,8 @@
                     </p>
                 </div>
             </div>
-            <!-- Slide 2: Ally's hero -->
-            <div class="story-carousel-slide hero-slide-ally" data-slide="2">
+            <!-- Slide 3: Ally's hero -->
+            <div class="story-carousel-slide hero-slide-ally">
                 <div class="ally-hero-bg"></div>
                 <div class="ally-hero-overlay"></div>
                 <div class="hero-slide-inner">
@@ -2264,8 +2503,8 @@
                     </p>
                 </div>
             </div>
-            <!-- Slide 1: Gwyn's hero -->
-            <div class="story-carousel-slide hero-slide-gwyn" data-slide="3">
+            <!-- Slide 4: Gwyn's hero -->
+            <div class="story-carousel-slide hero-slide-gwyn">
                 <div class="gwyn-hero-bg"></div>
                 <div class="gwyn-hero-overlay"></div>
                 <div class="hero-slide-inner">
