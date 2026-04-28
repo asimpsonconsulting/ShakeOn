@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shake On Overflow — Hero V2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Preload headline font so intro + milestones never mix with a fallback stack -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=block" id="sohero-bebas-neue-font">
+  <link rel="stylesheet" href="components/shake-on-overflow-hero.css">
+  <style>
+    /* Demo page only — not part of the embeddable hero */
+    :root { background: #fff; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: center;
+      font-family: system-ui, sans-serif;
+    }
+    #mount {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    #preview-help {
+      max-width: 40rem;
+      margin: 0 auto 1.25rem;
+      padding: 1rem 1.25rem;
+      background: #f5f2ec;
+      border: 1px solid rgba(1, 30, 66, 0.12);
+      border-radius: 8px;
+      color: #011e42;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    #preview-help code {
+      font-size: 0.88em;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+    }
+    #preview-help pre {
+      margin: 0.75rem 0;
+      padding: 0.75rem 1rem;
+      background: #fff;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <aside id="preview-help" aria-live="polite">
+    <strong>Why the page looks empty</strong><br>
+    This demo loads <code>ShakeOnOverflowHero.js</code> as an <strong>ES module</strong>. Browsers block that when you open the file directly (<code>file://</code>).
+    <p><strong>Fix:</strong> run a tiny local server from this project folder, then open the link below.</p>
+    <pre>chmod +x preview-hero.sh
+./preview-hero.sh</pre>
+    <p>Or: <code>python3 -m http.server 8765</code></p>
+    <p>Then open <a href="http://127.0.0.1:8765/shake-on-overflow-hero.html">http://127.0.0.1:8765/shake-on-overflow-hero.html</a> (port must match).</p>
+    <p>In VS Code / Cursor you can also use <strong>“Live Preview”</strong> or the Live Server extension on this HTML file.</p>
+  </aside>
+  <div id="mount"></div>
+  <script type="module">
+    import { mountShakeOnOverflowHero, DEFAULTS } from "./components/ShakeOnOverflowHero.js";
+
+    const help = document.getElementById("preview-help");
+    const mountEl = document.getElementById("mount");
+    if (!mountEl) throw new Error("Missing #mount");
+
+    /**
+     * Logo path: same directory as this HTML → repo root PNG.
+     * If you move the asset (e.g. to /assets/SO-WHT_1@3x-8.png on the live site), set logoSrc here.
+     */
+    mountShakeOnOverflowHero(mountEl, {
+      logoSrc: "SO-WHT_1@3x-8.png",
+      backgroundMode: "white",
+      loadBebasFont: false,
+      durationSec: DEFAULTS.durationSec,
+      // backgroundMode: "transparent",
+      // backgroundMode: "navy",
+    });
+    help?.remove();
+  </script>
+</body>
+</html>

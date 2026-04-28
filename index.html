@@ -2042,7 +2042,7 @@
         
         .next-game-link {
             display: block;
-            margin-top: 1rem;
+            margin: 1rem 0 0;
             padding: 0.75rem 1rem;
             font-size: 0.8rem;
             line-height: 1.6;
@@ -2537,26 +2537,26 @@
         <div class="fundraising-totals totals-column" id="fundraisingTotals">
             <div class="fundraising-totals-label">Total Raised</div>
             <div class="fundraising-total-box">
-                <span class="fundraising-total-amount" id="fundraisingTotalAmount">$46,120</span>
+                <span class="fundraising-total-amount" id="fundraisingTotalAmount">$50,025</span>
                 <div class="fundraising-goal">Goal: $20K</div>
-                <div class="fundraising-percent" id="fundraisingPercent">230.6% to goal</div>
+                <div class="fundraising-percent" id="fundraisingPercent">250.1% to goal</div>
             </div>
             <div class="fundraising-breakdown">
                 <div class="fundraising-breakdown-item">
                     <span class="fundraising-breakdown-label">Pledge Matches</span>
-                    <span class="fundraising-breakdown-amount" id="fundraisingPledgeMatches">$28,189</span>
+                    <span class="fundraising-breakdown-amount" id="fundraisingPledgeMatches">$30,471</span>
                 </div>
                 <div class="fundraising-breakdown-item">
                     <span class="fundraising-breakdown-label">One-Time Donations</span>
-                    <span class="fundraising-breakdown-amount" id="fundraisingOneTime">$7,931</span>
+                    <span class="fundraising-breakdown-amount" id="fundraisingOneTime">$9,554</span>
                 </div>
                 <div class="fundraising-breakdown-item">
                     <span class="fundraising-breakdown-label">Special One-Time Donations</span>
                     <span class="fundraising-breakdown-amount" id="fundraisingSpecial">$10,000</span>
                 </div>
             </div>
-            <a href="https://www.thepwhl.com/en/teams/new-york-sirens/schedule-25-26" target="_blank" rel="noopener noreferrer" class="fundraising-games-link"><span class="games-number">1</span>&nbsp;Regular Season Game remaining</a>
-            <a href="https://www.thepwhl.com/en/stats/game-center/329" target="_blank" rel="noopener noreferrer" class="next-game-link">Next Up: Saturday, April 25<br>New York Sirens v Boston Fleet<br>12:00 PM ET · Tsongas Center | Lowell</a>
+            <a href="https://www.thepwhl.com/en/teams/new-york-sirens/schedule-25-26" target="_blank" rel="noopener noreferrer" class="fundraising-games-link"><span class="games-number">0</span>&nbsp;Regular season games remaining</a>
+            <p class="next-game-link">Thank you for all the support this season!</p>
         </div>
 
         <!-- Story (right column, 2/3) -->
@@ -2572,12 +2572,36 @@
         </div>
         </div>
 
-        <!-- Maintainer-only (not rendered on the page): last dedication batch synced from pledge submissions through 2026-04-03; from one-time donation submissions through 2026-04-14. Update when adding new carousel slides. -->
+        <!-- Maintainer-only (not rendered on the page): last dedication batch synced from pledge submissions through 2026-04-03; from one-time donation submissions through 2026-04-14; carousel front batch added 2026-04-24; Macy & Connor slide added first 2026-04-24. Update when adding new carousel slides. -->
         <!-- Dedication Messages Carousel -->
         <div class="carousel-section">
             <p class="carousel-heading">Support and dedication messages</p>
             <div class="carousel-wrapper">
                 <div class="carousel-track" id="dedicationTrack">
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"Way to go Gator! Great season and fantastic work getting Shake On started! Macy and I are so proud of you!"</p>
+                        <p class="carousel-author">— Macy &amp; Connor</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"Love to Ally and the Simpson Family! Shake On!"</p>
+                        <p class="carousel-author">— Chelsea</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"Ally, so proud to know you! This is an awesome campaign!"</p>
+                        <p class="carousel-author">— Matt, Courtney, Peter, and Joseph</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"Matching Haley Winn's pledge for the last game of the regular season! Shake On!"</p>
+                        <p class="carousel-author">— Danica</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"Shake On!"</p>
+                        <p class="carousel-author">— Dwan</p>
+                    </div>
+                    <div class="carousel-slide">
+                        <p class="carousel-quote">"Keep up the great work! WEEEE WOOOO"</p>
+                        <p class="carousel-author">— Kaitlyn</p>
+                    </div>
                     <div class="carousel-slide">
                         <p class="carousel-quote">"Your first professional GWG and being awarded first star of the game deserves a donation to Shake On! You've got yourself a big fan in Toronto. Great work with the NY Sirens and with Shake On. Looking forward to seeing you play again next season, a true role model on and off the ice!"</p>
                         <p class="carousel-author">— Michaela</p>
@@ -2849,11 +2873,11 @@
 
         // ========== FUNDRAISING TOTALS - Update these values to refresh the display ==========
         const FUNDRAISING_TOTALS = {
-            totalRaised: '$46,120',
-            pledgeMatches: '$28,189',
-            oneTimeDonations: '$7,931',
+            totalRaised: '$50,025',
+            pledgeMatches: '$30,471',
+            oneTimeDonations: '$9,554',
             specialDonations: '$10,000',
-            percentToGoal: '230.6%'
+            percentToGoal: '250.1%'
         };
         // Populate fundraising totals on load
         document.addEventListener('DOMContentLoaded', function() {
