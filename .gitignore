@@ -26,3 +26,7 @@
 *.log
 *.tmp
 
+# Local / dev only — keep out of production (do not commit)
+GOOGLE_SCRIPT_WITH_EMAIL.js
+Gemini_Generated_Image_k62frgk62frgk62f.png
+INTERACTIVE_STYLE_GUIDE_REPLICATION_PROCESS.md
