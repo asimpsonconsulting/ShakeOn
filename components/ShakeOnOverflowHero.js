@@ -3,6 +3,7 @@
  *
  * ─── Where to change things ─────────────────────────────────────────────
  * LOGO_PATH          → DEFAULTS.logoSrc (or mount option logoSrc)
+ * INTRO_BANNER       → DEFAULTS.introBannerSrc (set "" to skip)
  * Brand colors       → DEFAULTS.colors + CSS vars on .sohero in .css file
  * Animation duration → DEFAULTS.durationSec + --sohero-duration (CSS)
  * Built-in milestones → DEFAULTS.builtinMilestones (see buildBuiltinMilestoneHtml)
@@ -28,20 +29,33 @@
  * checkCount: number of teal ✓ marks after text (default 0). Legacy showCheck: true → 1 check.
  */
 
+/** Seconds; must match `DEFAULTS.durationSec` and keyframes in shake-on-overflow-hero.css. */
+export const SOHERO_LOOP_DURATION_SEC = 27;
+
 export const DEFAULTS = {
   /** Logo asset (project uses white mark on transparent @ repo root). */
   logoSrc: "SO-WHT_1@3x-8.png",
-  /** Total loop length in seconds (fill + caption keyframes use % of this timeline). Last ~2s = final hold; see CSS). */
-  durationSec: 15,
+  /**
+   * Opening still (e.g. pledge banner). First 4s of each loop; set "" to omit.
+   * Path is relative to the page URL (demo: assets/… from repo root).
+   */
+  introBannerSrc: "assets/ally-pledge-intro-banner.png",
+  /** Seconds the intro image is held at the start of each loop (paired with CSS --sohero-intro-frac). */
+  introHoldSec: 4,
+  /**
+   * Total loop: introHoldSec + (15s story + 6×1s milestone padding + 2s confetti hold) = 4 + 23 = 27s.
+   * Keyframes in shake-on-overflow-hero.css are authored for this value.
+   */
+  durationSec: SOHERO_LOOP_DURATION_SEC,
   /** Page background preset for the hero shell. */
   backgroundMode: /** @type {SoheroBackgroundMode} */ ("white"),
   /** Injects Google Fonts link for Bebas Neue once (set false if the host page already loads it). */
   loadBebasFont: true,
   /** Accessible description of the motion (static copy, not tied to caption strings). */
   ariaLabel:
-    "Shake On fundraising progress animation: twenty thousand dollar goal, first hit, forty thousand two-x goal, second hit with two checks, then fifty thousand two and a half x goal with one two and three question marks as the final stretch fills in.",
+    "Shake On fundraising progress animation: opens with a static pledge banner, then twenty thousand dollar goal and hit, forty thousand two-x goal and hit with two checks, fifty thousand two and a half x goal then hit with three checks and gold confetti, then the loop repeats.",
   /**
-   * When true, uses the seven-state Overflow story (timing is fixed in CSS to the 7s loop).
+   * When true, uses the six-state Overflow story (timing is keyed to --sohero-duration in CSS).
    * Set false and supply `captions` for a custom 4-line (or merged) story instead.
    */
   builtinMilestones: true,
@@ -82,29 +96,77 @@ function normalizeCaptions(raw) {
 }
 
 /**
- * @param {number} n
- */
-function qmGroupHtml(n) {
-  const q = '<span class="sohero__qm" aria-hidden="true">?</span>';
-  const inner = Array.from({ length: n }, () => q).join("");
-  return `<span class="sohero__qm-group" aria-hidden="true">${inner}</span>`;
-}
-
-/**
- * Seven milestone rows; opacity timing is in `shake-on-overflow-hero.css` (s0–s6).
+ * Six milestone rows; opacity timing is in `shake-on-overflow-hero.css` (s0–s5).
  * @param {(s: string) => string} esc
  */
 function buildBuiltinMilestoneHtml(esc) {
   const t = esc;
+  const hit50kChecks =
+    '<span class="sohero__checks" aria-hidden="true">' +
+    '<span class="sohero__check">\u2713</span>' +
+    '<span class="sohero__check">\u2713</span>' +
+    '<span class="sohero__check">\u2713</span>' +
+    "</span>";
   return [
     `<p class="sohero__line sohero__line--s0"><span class="sohero__txt">${t("$20K Goal")}</span></p>`,
     `<p class="sohero__line sohero__line--s1"><span class="sohero__txt">${t("$20K Goal HIT!")}</span><span class="sohero__check" aria-hidden="true">\u2713</span></p>`,
     `<p class="sohero__line sohero__line--s2"><span class="sohero__txt">${t("$40K 2X Goal")}</span></p>`,
     `<p class="sohero__line sohero__line--s3"><span class="sohero__txt">${t("$40K 2X Goal HIT!")}</span><span class="sohero__checks" aria-hidden="true"><span class="sohero__check">\u2713</span><span class="sohero__check">\u2713</span></span></p>`,
-    `<p class="sohero__line sohero__line--s4"><span class="sohero__txt">${t("$50K 2.5X Goal")}</span>${qmGroupHtml(1)}</p>`,
-    `<p class="sohero__line sohero__line--s5"><span class="sohero__txt">${t("$50K 2.5X Goal")}</span>${qmGroupHtml(2)}</p>`,
-    `<p class="sohero__line sohero__line--s6"><span class="sohero__txt">${t("$50K 2.5X Goal")}</span>${qmGroupHtml(3)}</p>`,
+    `<p class="sohero__line sohero__line--s4"><span class="sohero__txt">${t("$50K 2.5X Goal")}</span></p>`,
+    `<p class="sohero__line sohero__line--s5"><span class="sohero__txt">${t("$50K 2.5X Goal HIT!")}</span>${hit50kChecks}</p>`,
   ].join("");
+}
+
+/** Gold-ish palette for end-of-loop confetti (no network deps). */
+const CONFETTI_COLORS = [
+  "#ffd86b",
+  "#f4d03f",
+  "#daa520",
+  "#ffec9e",
+  "#c9a227",
+  "#ffe566",
+];
+
+/**
+ * @param {HTMLElement} stage
+ * @param {boolean} reducedMotion
+ * @param {"burst" | "linger"} mode
+ */
+function appendConfettiLayer(stage, reducedMotion, mode) {
+  const wrap = document.createElement("div");
+  wrap.className =
+    mode === "linger" ? "sohero__confetti sohero__confetti--linger" : "sohero__confetti";
+  wrap.setAttribute("aria-hidden", "true");
+  if (reducedMotion) {
+    wrap.classList.add("sohero__confetti--reduced");
+  }
+  const n = mode === "linger" ? 36 : 44;
+  const phase = mode === "linger" ? 0.55 : 0;
+  for (let i = 0; i < n; i++) {
+    const angle = (i / n) * Math.PI * 2 + i * 0.41 + phase;
+    const dist = (mode === "linger" ? 22 : 26) + (i % 7) * 10;
+    const piece = document.createElement("span");
+    piece.className =
+      mode === "linger"
+        ? "sohero__confetti-piece sohero__confetti-piece--linger"
+        : "sohero__confetti-piece";
+    piece.style.background = CONFETTI_COLORS[(i + (mode === "linger" ? 2 : 0)) % CONFETTI_COLORS.length];
+    piece.style.setProperty("--tx", `${Math.cos(angle) * dist}vw`);
+    piece.style.setProperty("--ty", `${Math.sin(angle) * dist * 0.52 - 10}vh`);
+    piece.style.setProperty("--rot-end", `${220 + i * 41}deg`);
+    piece.style.setProperty("--delay", `${i * (mode === "linger" ? 0.018 : 0.011)}s`);
+    wrap.appendChild(piece);
+  }
+  stage.appendChild(wrap);
+}
+
+/**
+ * @param {HTMLElement} stage
+ * @param {boolean} reducedMotion
+ */
+function appendConfetti(stage, reducedMotion) {
+  appendConfettiLayer(stage, reducedMotion, "burst");
+  appendConfettiLayer(stage, reducedMotion, "linger");
 }
 
 /**
@@ -151,7 +213,7 @@ function buildCaptionHtml(captions, esc, checksHtml) {
 
 /**
  * @param {HTMLElement} container
- * @param {Partial<typeof DEFAULTS> & { logoSrc?: string; backgroundMode?: SoheroBackgroundMode; durationSec?: number; captions?: SoheroCaption[]; ariaLabel?: string; colors?: typeof DEFAULTS.colors; loadBebasFont?: boolean; builtinMilestones?: boolean }} [options]
+ * @param {Partial<typeof DEFAULTS> & { logoSrc?: string; introBannerSrc?: string; introHoldSec?: number; backgroundMode?: SoheroBackgroundMode; durationSec?: number; captions?: SoheroCaption[]; ariaLabel?: string; colors?: typeof DEFAULTS.colors; loadBebasFont?: boolean; builtinMilestones?: boolean }} [options]
  * @returns {() => void} unmount
  */
 export function mountShakeOnOverflowHero(container, options = {}) {
@@ -194,6 +256,15 @@ export function mountShakeOnOverflowHero(container, options = {}) {
 
   const esc = (s) =>
     s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+  const escAttr = (s) =>
+    s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+
+  const introSrc =
+    typeof config.introBannerSrc === "string" ? config.introBannerSrc.trim() : "";
+  const introBlock =
+    introSrc.length > 0
+      ? `<div class="sohero__intro" aria-hidden="true"><img class="sohero__intro-img" src="${escAttr(introSrc)}" alt="" decoding="async" width="1200" height="630" /></div>`
+      : "";
 
   const checksHtml = (n) => {
     if (!n) return "";
@@ -209,6 +280,7 @@ export function mountShakeOnOverflowHero(container, options = {}) {
     : buildCaptionHtml(config.captions, esc, checksHtml);
 
   section.innerHTML = `
+    ${introBlock}
     <div class="sohero__layout">
       <div class="sohero__caption" aria-hidden="true">${capHtml}</div>
       <div class="sohero__stage" aria-hidden="true"></div>
@@ -222,6 +294,7 @@ export function mountShakeOnOverflowHero(container, options = {}) {
 
   const svg = buildSvg(config.logoSrc, reduced);
   stage.appendChild(svg);
+  appendConfetti(stage, reduced);
 
   /** Prevent layout shift: reserve aspect ratio box already in CSS */
   container.appendChild(section);

@@ -17,7 +17,8 @@
   --sohero-rim: #f5f2ec;
 
   /* ─── Timing: fallback; mount() sets --sohero-duration from DEFAULTS.durationSec ─── */
-  --sohero-duration: 15s;
+  /* 27s = 4s intro banner + 23s main (15s base + 6×1s milestone + 2s confetti hold) */
+  --sohero-duration: 27s;
 
   --sohero-surface: var(--sohero-white);
   --sohero-ink: var(--sohero-navy);
@@ -32,6 +33,47 @@
   background: var(--sohero-surface);
   min-height: clamp(280px, 52vw, 480px);
   border-radius: 0;
+}
+
+/* Opening pledge banner — first segment of loop; fades before logo story */
+.sohero__intro {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  display: grid;
+  place-items: center;
+  padding: clamp(0.5rem, 2vw, 1.25rem);
+  box-sizing: border-box;
+  background: var(--sohero-surface);
+  animation-name: sohero-intro-fade;
+  animation-duration: var(--sohero-duration);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  pointer-events: none;
+}
+
+.sohero__intro-img {
+  display: block;
+  width: 100%;
+  max-width: min(100%, 920px);
+  height: auto;
+  max-height: min(72vh, 520px);
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 8px 32px rgba(1, 30, 66, 0.12);
+}
+
+@keyframes sohero-intro-fade {
+  0%,
+  14.814814% {
+    opacity: 1;
+    visibility: visible;
+  }
+  16.2%,
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 .sohero[data-sohero-bg="transparent"] {
@@ -63,8 +105,8 @@
   width: 100%;
   max-width: min(100%, 760px);
   margin-inline: auto;
-  /* Fixed envelope — wide enough for “$40K 2X Goal HIT!” + marks */
-  height: clamp(3.5rem, 11vw, 6.25rem);
+  /* Fixed envelope — wide enough for “$40K 2X Goal HIT!” + “$50K 2.5X Goal HIT!” + checks */
+  height: clamp(4rem, 12vw, 6.75rem);
   font-family: "Bebas Neue", "Arial Narrow", system-ui, sans-serif;
   font-weight: 400;
   line-height: 1;
@@ -97,7 +139,7 @@
   pointer-events: none;
 }
 
-/* Built-in seven-state story (see ShakeOnOverflowHero.js buildBuiltinMilestoneHtml) */
+/* Built-in six-state story (see ShakeOnOverflowHero.js buildBuiltinMilestoneHtml) */
 .sohero__line--s0 {
   animation-name: sohero-cap-s0;
 }
@@ -120,10 +162,6 @@
 
 .sohero__line--s5 {
   animation-name: sohero-cap-s5;
-}
-
-.sohero__line--s6 {
-  animation-name: sohero-cap-s6;
 }
 
 /* Merged legacy row */
@@ -207,14 +245,98 @@
   max-width: min(100%, 760px);
   position: relative;
   aspect-ratio: 1889 / 633;
+  overflow: visible;
   filter: drop-shadow(0 0 0.75px rgba(1, 30, 66, 0.12)) drop-shadow(0 1px 1px rgba(1, 30, 66, 0.06));
 }
 
 .sohero__svg {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
   height: auto;
   vertical-align: top;
+}
+
+/* Gold confetti — dual layers during $50K HIT (see sohero-cap-s5). */
+.sohero__confetti {
+  position: absolute;
+  inset: -18% -14%;
+  z-index: 4;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.sohero__confetti--linger {
+  z-index: 5;
+}
+
+.sohero__confetti--reduced {
+  display: none;
+}
+
+.sohero__confetti-piece {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: clamp(4px, 1vw, 9px);
+  height: clamp(6px, 1.45vw, 12px);
+  margin-left: calc(clamp(4px, 1vw, 9px) * -0.5);
+  margin-top: calc(clamp(6px, 1.45vw, 12px) * -0.5);
+  border-radius: 1px;
+  opacity: 0;
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.45);
+  animation: sohero-confetti-piece var(--sohero-duration) linear infinite;
+  animation-delay: var(--delay, 0s);
+  will-change: transform, opacity;
+}
+
+.sohero__confetti-piece--linger {
+  width: clamp(3px, 0.85vw, 8px);
+  height: clamp(5px, 1.2vw, 11px);
+  margin-left: calc(clamp(3px, 0.85vw, 8px) * -0.5);
+  margin-top: calc(clamp(5px, 1.2vw, 11px) * -0.5);
+  animation-name: sohero-confetti-linger;
+}
+
+@keyframes sohero-confetti-piece {
+  0%,
+  75.5% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
+  }
+  76.8% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.05) rotate(32deg);
+  }
+  97.8% {
+    opacity: 0.96;
+    transform: translate(calc(-50% + var(--tx, 0vw)), calc(-50% + var(--ty, 0vh))) scale(1) rotate(var(--rot-end, 360deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--tx, 0vw)), calc(-50% + var(--ty, 0vh))) scale(0.5) rotate(var(--rot-end, 360deg));
+  }
+}
+
+@keyframes sohero-confetti-linger {
+  0%,
+  78% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.08) rotate(0deg);
+  }
+  79.5% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1) rotate(-20deg);
+  }
+  98.5% {
+    opacity: 0.92;
+    transform: translate(calc(-50% + var(--tx, 0vw)), calc(-50% + var(--ty, 0vh))) scale(1.05) rotate(var(--rot-end, 360deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--tx, 0vw)), calc(-50% + var(--ty, 0vh))) scale(0.45) rotate(var(--rot-end, 360deg));
+  }
 }
 
 /* Fill motion: transform-origin bottom center via SVG transform-box */
@@ -242,20 +364,20 @@
 }
 
 /*
- * Liquid fills — story compressed to first 13/15 of the loop, then hold ~2s at “all full”,
- * then quick reset at end for a clean loop (99.9%–100%).
- * Scale factor f = (13/15) / (97.142857/100) = 86.6667/97.142857 ≈ 0.892157
+ * Liquid fills — frozen during intro (0–~14.8%), then same story as former 15s loop
+ * stretched across the remaining ~23s (×23/15), then reset at 100%.
  */
 @keyframes sohero-fill-orange {
-  0% {
+  0%,
+  14.814815% {
     transform: scaleY(0);
     animation-timing-function: cubic-bezier(0.45, 0.02, 0.2, 1);
   }
-  28.0245% {
+  38.652716% {
     transform: scaleY(1);
     animation-timing-function: linear;
   }
-  99.9% {
+  99.733704% {
     transform: scaleY(1);
     animation-timing-function: cubic-bezier(0.55, 0, 0.85, 0.98);
   }
@@ -266,15 +388,16 @@
 
 @keyframes sohero-fill-teal {
   0%,
-  35.6863% {
+  14.814815%,
+  45.214259% {
     transform: scaleY(0);
     animation-timing-function: cubic-bezier(0.45, 0.02, 0.2, 1);
   }
-  58.6095% {
+  64.759741% {
     transform: scaleY(1);
     animation-timing-function: linear;
   }
-  99.9% {
+  99.733704% {
     transform: scaleY(1);
     animation-timing-function: cubic-bezier(0.55, 0, 0.85, 0.98);
   }
@@ -285,15 +408,16 @@
 
 @keyframes sohero-fill-navy {
   0%,
-  66.2414% {
+  14.814815%,
+  71.192407% {
     transform: scaleY(0);
     animation-timing-function: cubic-bezier(0.45, 0.02, 0.2, 1);
   }
-  86.6667% {
+  88.703704% {
     transform: scaleY(1);
     animation-timing-function: linear;
   }
-  99.9% {
+  99.733704% {
     transform: scaleY(1);
     animation-timing-function: cubic-bezier(0.55, 0, 0.85, 0.98);
   }
@@ -303,18 +427,22 @@
 }
 
 /*
- * Built-in milestones — overlapping crossfades (no “all lines at 0” gaps → no white flash).
- * End plate 86.67%–99.2%; last ~0.8% crossfades s6 → s0 for a seamless loop.
- * Percentages scaled by f = 86.6667/97.142857 vs original 7s-relative story.
+ * Built-in milestones — intro hides captions; then former 15s story remapped to 14.81%–100%.
+ * $50K: plain goal then HIT! + ✓✓✓ with long gold confetti (s5).
  */
 @keyframes sohero-cap-s0 {
   0%,
-  24.0882% {
+  14.814814% {
+    opacity: 0;
+    animation-timing-function: ease-in-out;
+  }
+  14.815%,
+  35.3344% {
     opacity: 1;
     animation-timing-function: ease-in-out;
   }
-  27%,
-  98.5% {
+  37.814815%,
+  99.361111% {
     opacity: 0;
     animation-timing-function: ease-in-out;
   }
@@ -325,16 +453,16 @@
 
 @keyframes sohero-cap-s1 {
   0%,
-  24.5% {
+  35.702778% {
     opacity: 0;
     animation-timing-function: ease-in-out;
   }
-  27%,
-  34.7941% {
+  37.814815%,
+  44.451852% {
     opacity: 1;
     animation-timing-function: linear;
   }
-  37%,
+  46.333333%,
   100% {
     opacity: 0;
   }
@@ -342,16 +470,16 @@
 
 @keyframes sohero-cap-s2 {
   0%,
-  35.5% {
+  45.055556% {
     opacity: 0;
     animation-timing-function: ease-in-out;
   }
-  37.7382%,
-  58.4% {
+  46.962222%,
+  64.563% {
     opacity: 1;
     animation-timing-function: linear;
   }
-  60.8%,
+  66.607407%,
   100% {
     opacity: 0;
   }
@@ -359,16 +487,16 @@
 
 @keyframes sohero-cap-s3 {
   0%,
-  55.8% {
+  64.307407% {
     opacity: 0;
     animation-timing-function: ease-in-out;
   }
-  58.1%,
-  64.9486% {
+  64.45%,
+  70.141407% {
     opacity: 1;
     animation-timing-function: linear;
   }
-  67%,
+  71.888889%,
   100% {
     opacity: 0;
   }
@@ -376,16 +504,16 @@
 
 @keyframes sohero-cap-s4 {
   0%,
-  65.8% {
+  72.4% {
     opacity: 0;
     animation-timing-function: ease-in-out;
   }
-  68.1716%,
-  72.0863% {
+  72.886852%,
+  76.05% {
     opacity: 1;
     animation-timing-function: linear;
   }
-  74.2%,
+  76.85%,
   100% {
     opacity: 0;
   }
@@ -393,32 +521,16 @@
 
 @keyframes sohero-cap-s5 {
   0%,
-  72.5% {
+  76.05% {
     opacity: 0;
     animation-timing-function: ease-in-out;
   }
-  74.7627%,
-  78.7775% {
+  77%,
+  99.05% {
     opacity: 1;
     animation-timing-function: linear;
   }
-  81%,
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes sohero-cap-s6 {
-  0%,
-  79.2% {
-    opacity: 0;
-    animation-timing-function: ease-in-out;
-  }
-  81.3647%,
-  99.2% {
-    opacity: 1;
-    animation-timing-function: linear;
-  }
+  99.65%,
   100% {
     opacity: 0;
   }
@@ -439,11 +551,12 @@
 
 @keyframes sohero-reveal-check {
   0%,
-  21% {
+  14.814815%,
+  32.652778% {
     opacity: 0;
     animation-timing-function: ease-out;
   }
-  27% {
+  37.814815% {
     opacity: 1;
     animation-timing-function: linear;
   }
@@ -529,6 +642,12 @@
 
 /* Reduced motion: static meaningful frame */
 @media (prefers-reduced-motion: reduce) {
+  .sohero__intro {
+    animation: none !important;
+    opacity: 0;
+    visibility: hidden;
+  }
+
   .sohero__lift-orange,
   .sohero__lift-teal,
   .sohero__lift-navy,
@@ -553,15 +672,14 @@
   .sohero__line--s1,
   .sohero__line--s2,
   .sohero__line--s3,
-  .sohero__line--s4,
-  .sohero__line--s5 {
+  .sohero__line--s4 {
     opacity: 0;
     position: absolute;
     inset: 0;
   }
 
   .sohero__line--m3,
-  .sohero__line--s6 {
+  .sohero__line--s5 {
     opacity: 1;
     position: absolute;
     inset: 0;
